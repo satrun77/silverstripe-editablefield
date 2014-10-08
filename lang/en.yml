@@ -1,0 +1,81 @@
+en:
+  EditableFieldCheckbox:
+    PLURALNAME: Checkboxes
+    SINGULARNAME: 'Checkbox Field'
+  EditableFieldCheckboxGroup:
+    PLURALNAME: 'Checkbox Groups'
+    SINGULARNAME: 'Checkbox Group'
+  EditableFieldCountryDropdown:
+    PLURALNAME: 'Country Dropdowns'
+    SINGULARNAME: 'Country Dropdown Field'
+  EditableFieldDate:
+    PLURALNAME: 'Date Fields'
+    SINGULARNAME: 'Date Field'
+  EditableFieldDropdown:
+    PLURALNAME: Dropdowns
+    SINGULARNAME: 'Dropdown Field'
+  EditableFieldEmail:
+    PLURALNAME: 'Email Fields'
+    SINGULARNAME: 'Email Field'
+  EditableFieldFile:
+    PLURALNAME: 'File Upload Fields'
+    SINGULARNAME: 'File Upload Field'
+  EditableField:
+    ADD: Add
+    ADDLabel: 'Add option'
+    BLANK: Blank
+    CHECKEDBYDEFAULT: 'Checked by Default?'
+    CUSTOMERROR: 'Custom Error Message'
+    DEFAULTTOTODAY: 'Default to Today?'
+    DELETE: Delete
+    EXTRACLASSA: 'Extra Styling/Layout'
+    EXTRACLASSB: 'Extra css Class - separate multiples with a space'
+    FIELDCONFIGURATION: 'Field Configuration'
+    GROUP: Group
+    MAXVALUE: 'Max Value'
+    MINVALUE: 'Min Value'
+    NO: No
+    OPTIONS: Options
+    PLURALNAME: 'Editable Fields'
+    REQUIRED: 'Is this field Required?'
+    RIGHTTITLE: 'Right Title'
+    SHOWOPTIONS: 'Show Options'
+    SINGULARNAME: 'Editable Field'
+    VALIDATION: Validation
+    YES: Yes
+  EditableFieldHeading:
+    LEVEL: 'Select Heading Level'
+    PLURALNAME: Headings
+    SINGULARNAME: Heading
+  EditableFieldLiteral:
+    HIDEFROMREPORT: 'Hide from reports?'
+    PLURALNAME: 'HTML Blocks'
+    SINGULARNAME: 'HTML Block'
+  EditableFieldMemberList:
+    PLURALNAME: 'Member List Fields'
+    SINGULARNAME: 'Member List Field'
+  EditableFieldMultipleOption:
+    PLURALNAME: 'Editable Multiple Option Fields'
+    SINGULARNAME: 'Editable Multiple Option Field'
+  EditableFieldNumeric:
+    PLURALNAME: 'Numeric Fields'
+    SINGULARNAME: 'Numeric Field'
+  EditableFieldOption:
+    DELETE: 'Remove this option'
+    DRAG: 'Drag to rearrange order of options'
+    LOCKED: 'These fields cannot be modified'
+    PLURALNAME: 'Editable Options'
+    SINGULARNAME: 'Editable Option'
+  EditableFieldRadio:
+    PLURALNAME: 'Radio Fields'
+    SINGULARNAME: 'Radio Field'
+  EditableFieldText:
+    NUMBERROWS: 'Number of rows'
+    PLURALNAME: 'Text Fields'
+    SINGULARNAME: 'Text Field'
+    TEXTLENGTH: 'Text length'
+  EditableFieldPageTypeList:
+    PLURALNAME: 'Page Type List Fields'
+    SINGULARNAME: 'Page Type List Field'
+  EditableFieldAdmin:
+    SELECTAFIELD: 'Select a Field'

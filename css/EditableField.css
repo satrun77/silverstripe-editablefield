@@ -1,0 +1,162 @@
+/*
+ * Left menu
+---------------------------------------- */
+.icon.icon-16.icon-editablefieldadmin {
+	background-position: 0 -128px;
+}
+
+/* Field Listing
+ * @author silverstripe/userforms
+ * @author Mohamed Alsharaf
+---------------------------------------- */
+.EditableFieldEditor .FieldList {
+    padding: 10px 0;
+}
+	.EditableFieldEditor .FieldList .EditableField {
+		margin: 2px;
+		padding: 3px 0;
+		width: 100%;
+	}
+		.EditableFieldEditor .FieldList .EditableField * {
+			display: inline;
+			vertical-align: middle;
+		}
+		.EditableFieldEditor .FieldList .EditableField .fieldHandler,
+		.EditableFieldEditor .FieldList .EditableField .handle {
+			cursor: move;
+		}
+		.EditableFieldEditor .FieldList .EditableField .fieldInfo {
+			float: left;
+			padding-right: 11px;
+		}
+		.EditableFieldEditor .FieldList .EditableField .fieldActions {
+			float: left;
+			margin-top: 10px;
+		}
+			.EditableFieldEditor .FieldList .EditableField .fieldActions a {
+				padding: 0 5px 5px 20px;
+				font-size: 12px;
+			}
+				.EditableFieldEditor .FieldList .EditableField .moreOptions {
+					background: url(../../cms/images/edit.gif) no-repeat top left;
+				}
+					.EditableFieldEditor .FieldList .EditableField .moreOptions.showing {
+						color: #666;
+						text-decoration: none;
+					}
+				.EditableFieldEditor .FieldList .EditableField .delete {
+					background: url(../../cms/images/delete.gif) no-repeat top left;
+				}
+				.EditableFieldEditor .FieldList .EditableField .save {
+					background: url(../../cms/images/check.png) no-repeat top left;
+				}
+		.EditableFieldEditor .FieldList .EditableField input {
+			width: 250px;
+			margin-left: 0px;
+		}
+		.EditableFieldEditor .FieldList .EditableField input.small {
+			width:120px;
+		}
+
+		/** Field Options **/
+		.EditableFieldEditor .FieldList .EditableField div.extraOptions {
+			display: block;
+			margin: 4px 0px 15px 3px;
+			padding: 3px;
+			clear: both;
+			background: #ECEFF1;
+			border: 1px solid #C0C0C2;
+			-webkit-box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
+			-moz-box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
+			box-shadow: rgba(248, 248, 248, 0.9) -1px 0 0 inset, 0 0 1px rgba(201, 205, 206, 0.8);
+			float: left;
+			width: 99%;
+		}
+			.EditableFieldEditor .FieldList .EditableField .extraOptions * {
+				display: block;
+			}
+				.EditableFieldEditor .FieldList .EditableField .extraOptions .handle {
+					float: left;
+					margin-right: 3px;
+				}
+				.EditableFieldEditor .FieldList .EditableField .extraOptions ul {
+					padding: 5px 0;
+				}
+					.EditableFieldEditor .FieldList .EditableField .extraOptions li {
+						padding: 3px 0;
+						width: 100%;
+						overflow: hidden;
+					}
+				.EditableFieldEditor .FieldList .EditableField .extraOptions a {
+					background: none;
+				}
+				.EditableFieldEditor .FieldList .EditableField .extraOptions input {
+					font-size: 11px;
+					padding: 5px;
+					float: left;
+				}
+				.EditableFieldEditor .FieldList .EditableField .extraOptions .deleteOption {
+					width: 20px;
+					margin: 4px 0 0 4px;
+					background: none;
+					height: 20px;
+					float: left;
+					display: block;
+				}
+				.EditableFieldEditor .FieldList .EditableField .extraOptions select {
+					width: 221px;
+				}
+				.EditableFieldEditor .FieldList .EditableField .extraOptions .chzn-drop input {
+					font-size: 12px;
+					padding: 4px 20px 4px 5px;
+					float: none;
+				}
+				.EditableFieldEditor .FieldList .EditableField a.addableOption,
+				.EditableFieldEditor .FieldList .EditableField a.addCondition {
+					background: url(../../cms/images/add.gif) no-repeat top left;
+					padding: 1px 0 2px 20px;
+					font-size: 12px;
+					width: auto;
+					margin-left: 3px;
+				}
+				/* Field Options Group */
+				.EditableFieldEditor .FieldList .fieldOptionsGroup {
+					padding: 4px 8px 8px 8px;
+					margin: 5px;
+					border: 1px solid #D0D3D5;
+				}
+					.EditableFieldEditor .FieldList .fieldOptionsGroup legend {
+						font-size: 15px;
+						padding: 0 4px;
+					}
+				/* Field Lengths */
+				.EditableFieldEditor .FieldList .EditableField .fieldgroupField {
+					float: left;
+				}
+					.EditableFieldEditor .FieldList .EditableField .fieldgroupField label {
+						float: left;
+						padding: 0 4px;
+					}
+					.EditableFieldEditor .FieldList .EditableField .fieldgroupField input {
+						width: 80px;
+					}
+			.EditableFieldEditor .FieldList .EditableField .middleColumn {
+				background: none;
+			}
+			/* CHECKBOX */
+			.EditableFieldEditor .FieldList .EditableField .checkbox { }
+				.EditableFieldEditor .FieldList .EditableField .checkbox input {
+					float: left;
+					width:auto;
+					margin: 0 8px 0 0;
+				}
+		/* HIDE */
+		.EditableFieldEditor .FieldList li.EditableField .hidden {
+			display: none !important;
+		}
+		/* Holder to prevent form from collapsing */
+		.EditableFieldEditor .FieldList .removed-form-field {
+			height: 40px;
+			display: block;
+			overflow: hidden;
+		}
