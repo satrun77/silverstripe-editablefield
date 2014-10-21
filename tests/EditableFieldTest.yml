@@ -1,0 +1,127 @@
+EditableFieldOption:
+    option-1:
+        Name: Option1
+        Title: Option 1
+    
+    option-2:
+        Name: Option2
+        Title: Option 2
+
+    department-1:
+        Name: dept1
+        Title: sales@example.com
+
+    department-2:
+        Name: dept2
+        Title: accounts@example.com
+
+    option-3:
+        Name: Option3
+        Title: Option 3
+
+    option-4:
+        Name: Option4
+        Title: Option 4
+
+    option-5:
+        Name: Option5
+        Title: Option 5
+
+    option-6:
+        Name: Option6
+        Title: Option 6
+        
+EditableFieldText:
+    basic-text:
+        Name: basictextname
+        Title: Basic Text Field
+ 
+    basic-text-2:
+        Name: basictextname
+        Title: Basic Text Field
+        
+    text-area:
+        Name: textareafield
+        Title: Textarea Field
+        CustomSettings: a:5:{s:10:"ExtraClass";s:0:"";s:10:"RightTitle";s:0:"";s:9:"MinLength";s:0:"";s:9:"MaxLength";s:0:"";s:4:"Rows";s:1:"4";}
+
+    required-text:
+        Name: requiredtextfield
+        Title: Required Text Field
+        CustomErrorMessage: Custom Error Message
+        Required: true
+
+EditableFieldDropdown:
+    basic-dropdown:
+        Name: basicdropdown
+        Title: Basic Dropdown Field
+        Options: =>EditableFieldOption.option-1, =>EditableFieldOption.option-2
+        
+    department-dropdown:
+        Name: department
+        Title: Department
+        Options: =>EditableFieldOption.department-1, =>EditableFieldOption.department-2
+        
+EditableFieldCheckbox:
+    checkbox-1:
+        Name: checkbox1
+        Title: Checkbox 1
+        
+    checkbox-2:
+        Name: checkbox1
+        Title: Checkbox 1
+        
+EditableFieldEmail:
+    email-field:
+        Name: emailfield
+        Title: Email
+        
+EditableFieldNumeric:
+    numeric-field:
+        Name: numericfield
+        Title: Numeric
+        
+EditableFieldRadio:
+    radio-field:
+        Name: radiooption
+        Title: Radio Option
+        Options: =>EditableFieldOption.option-5, =>EditableFieldOption.option-6
+
+EditableFieldLiteral:
+    html-field:
+        Name: htmlfield
+        Title: Html text
+        
+EditableFieldHeading:
+    heading-field:
+        Name: headingfield
+        Title: Heading text
+        CustomSettings: a:1:{s:5:"Level";i:3;}
+            
+EditableFieldDate:
+    dob-field:
+        Name: dobfield
+        Title: DOB text
+
+EditableFieldCountryDropdown:
+    country-field:
+        Name: countryfield
+        Title: Country list
+
+EditableFieldMemberList:
+    member-field:
+        Name: memberfield
+        Title: Member list
+        CustomSettings: a:1:{s:7:"GroupID";s:1:"1";}
+        
+EditableFieldPageTypeList:
+    pagetype-field:
+        Name: pagetypefield
+        Title: Page Type list
+        CustomSettings: a:1:{s:12:"PageTypeName";s:4:"Page";}
+    
+EditableFieldCheckboxGroup:
+    checkbox-group:
+        Name: checkboxgroup
+        Title: Check box group
+        Options: =>EditableFieldOption.option-3, =>EditableFieldOption.option-4
