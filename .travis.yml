@@ -1,0 +1,25 @@
+language: php 
+php:
+  - 5.3
+
+env:
+  - DB=MYSQL CORE_RELEASE=3.1
+  - DB=PGSQL CORE_RELEASE=3.1
+
+matrix:
+  include:
+  - php: 5.4
+    env: DB=MYSQL CORE_RELEASE=master
+
+before_script:
+  - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
+  - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
+  - cd ~/builds/ss
+
+script: phpunit -c editablefield/ --coverage-clover=coverage.clover editablefield/tests
+
+after_script:
+  - mv coverage.clover editablefield/coverage.clover
+  - cd editablefield
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
