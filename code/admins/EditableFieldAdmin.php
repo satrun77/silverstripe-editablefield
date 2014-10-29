@@ -203,7 +203,7 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * @param CMSForm $form
 	 * @return bool|string
 	 */
-	public function addOptionField($record, $form) {
+	public function addOptionField($record) {
 		// Check security token
 		if(!SecurityToken::inst()->checkRequest($this->request)) {
 			return $this->httpError(400);
@@ -332,16 +332,15 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * Return a {@link ArrayList} of all the addable fields to populate the add
 	 * field menu.
 	 *
-	 * @return ArrayList
+	 * @return array
 	 */
 	public function getCreatableFields() {
 		$fields = ClassInfo::subclassesFor('EditableField');
+		$output = array();
 
 		if($fields) {
 			array_shift($fields); // get rid of subclass 0
 			asort($fields); // get in order
-
-			$output = array();
 
 			foreach($fields as $field => $title) {
 				// Skip an abstract class
@@ -355,11 +354,9 @@ class EditableFieldAdmin extends LeftAndMain {
 					$output[$field] = $niceTitle;
 				}
 			}
-
-			return $output;
 		}
 
-		return false;
+		return $output;
 	}
 
 	/**
@@ -387,7 +384,7 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * @see LeftAndMain::canView()
 	 */
 	public function canView($member = null) {
-		return Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+		return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
 	}
 
 	/**
@@ -397,7 +394,7 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * @return boolean
 	 */
 	public function canEdit($member = null) {
-		return Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+		return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
 	}
 
 	/**
@@ -407,7 +404,7 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * @return boolean
 	 */
 	public function canDelete($member = null) {
-		return Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+		return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
 	}
 
 	/**
@@ -417,7 +414,7 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * @return boolean
 	 */
 	public function canCreate($member = null) {
-		return Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+		return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
 	}
 
 }

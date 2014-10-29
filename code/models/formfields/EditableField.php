@@ -37,7 +37,7 @@ class EditableField extends DataObject {
 	/**
 	 * Template to render the field into
 	 *
-	 * @return String
+	 * @return HTMLText
 	 */
 	public function EditSegment() {
 		return $this->renderWith('EditableField');
@@ -115,6 +115,7 @@ class EditableField extends DataObject {
 	 * not exist
 	 *
 	 * @param String Value to use as key
+	 * @param string $setting
 	 * @return String
 	 */
 	public function getSetting($setting) {
@@ -210,6 +211,7 @@ class EditableField extends DataObject {
 	 * Generate a name for the Setting field
 	 *
 	 * @param String name of the setting
+	 * @param string $field
 	 * @return String
 	 */
 	public function getSettingName($field) {

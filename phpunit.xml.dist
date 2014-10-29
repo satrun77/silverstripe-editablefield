@@ -18,6 +18,11 @@
                 <directory>tests/</directory>
                 <directory>_config/</directory>
                 <directory>images/</directory>
+                <directory>docs/</directory>
+                <directory>javascript/</directory>
+                <directory>lang/</directory>
+                <directory>templates/</directory>
+                <directory>css/</directory>
             </exclude>
         </whitelist>
     </filter>

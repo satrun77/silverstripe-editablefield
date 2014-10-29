@@ -85,7 +85,7 @@ class EditableFieldAdminTest extends FunctionalTest {
 			'Fields' => array(
 				$text->ID => array(),
 			),
-			'action_delete' => '1',
+			'action_delete' => 1,
 			'delete_row' => 1
 		));
 
@@ -100,7 +100,7 @@ class EditableFieldAdminTest extends FunctionalTest {
 		$optionsCount = $dropdown->Options()->count();
 
 		$this->post('admin/editablefield/EditForm', array(
-			'action_addoptionfield' => '1',
+			'action_addoptionfield' => 1,
 			'Parent' => $dropdown->ID
 		));
 
