@@ -28,7 +28,7 @@ class EditableFieldEditor extends FormField {
 	 * @return DataList
 	 */
 	public function Fields() {
-		if(null == $this->fields) {
+		if(null === $this->fields) {
 			$this->fields = $this->form->getRecord()->EditableFieldEditor();
 		}
 		return $this->fields;

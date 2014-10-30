@@ -44,26 +44,6 @@ class EditableField extends DataObject {
 	}
 
 	/**
-	 * Return whether a user can delete this form field
-	 * based on whether they can edit the page
-	 *
-	 * @return bool
-	 */
-// 	public function canDelete($member = null) {
-// 		return ($this->Parent()->canEdit($member = null) && !$this->isReadonly());
-// 	}
-
-	/**
-	 * Return whether a user can edit this form field
-	 * based on whether they can edit the page
-	 *
-	 * @return bool
-	 */
-// 	public function canEdit($member = null) {
-// 		return ($this->Parent()->canEdit($member = null) && !$this->isReadonly());
-// 	}
-
-	/**
 	 * To prevent having tables for each fields minor settings we store it as
 	 * a serialized array in the database.
 	 *
@@ -256,7 +236,7 @@ class EditableField extends DataObject {
 	 * Implement custom field Configuration on this field. Includes such things as
 	 * settings and options of a given editable form field
 	 *
-	 * @return FieldSet
+	 * @return FieldList
 	 */
 	public function getFieldConfiguration() {
 		$extraClass = ($this->getSetting('ExtraClass')) ? $this->getSetting('ExtraClass') : '';
@@ -294,7 +274,7 @@ class EditableField extends DataObject {
 	 * Append custom validation fields to the default 'Validation'
 	 * section in the editable options view
 	 *
-	 * @return FieldSet
+	 * @return FieldList|false
 	 */
 	public function getFieldValidationOptions() {
 		$fields = new FieldList(
@@ -312,7 +292,7 @@ class EditableField extends DataObject {
 	 * @return FormField
 	 */
 	public function getFormField() {
-		if(null == $this->field) {
+		if(null === $this->field) {
 			$this->field = $this->initFormField();
 		}
 		return $this->field;

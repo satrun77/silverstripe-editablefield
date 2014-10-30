@@ -83,9 +83,6 @@
 
 		/**
 		 * Workaround for not refreshing the sort.
-		 *
-		 * TODO: better solution would to not fire this on every hover but needs
-		 * to ensure it doesn't have edge cases. The sledge hammer approach.
 		 */
 		$(".fieldHandler, .handle").live('hover', function() {
 			editablefield.update();
