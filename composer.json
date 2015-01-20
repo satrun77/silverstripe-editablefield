@@ -3,7 +3,6 @@
 	"description": "This module allows CMS admin to create an manage list of configurable form fields that can be used by other module such as, satrun77/configurablepage.",
 	"keywords": ["silverstripe", "form fields", "model admin"],
 	"type": "silverstripe-module",
-	"version": "1.0.0-dev",
 	"homepage": "https://github.com/satrun77/silverstripe-editablefield",
 	"license": "MIT",
 	"authors": [{
