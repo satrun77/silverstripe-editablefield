@@ -89,6 +89,10 @@
 				display: block;
 				font-weight: normal;
 			}
+				.EditableFieldEditor .FieldList .EditableField .extraOptions .fieldholder-small-label {
+					float: left;
+					margin-right: 0;
+				}
 				.EditableFieldEditor .FieldList .EditableField .extraOptions .handle {
 					float: left;
 					margin-right: 3px;
