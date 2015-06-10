@@ -53,8 +53,41 @@ class EditableFieldAdmin extends LeftAndMain {
 				->setAttribute('data-icon', 'accept')
 		);
 
-		// Created form fields element
-		$fields = new FieldList(new EditableFieldEditor("Fields", 'Fields', ""));
+		// Form tabs
+		$fieldsTab = new Tab('Fields', _t('EditableFieldAdmin.Fields', 'Fields'));
+		$groupsTab = new Tab('Groups', singleton('Group')->i18n_plural_name());
+
+		// Form tab container
+		$tabSet = new TabSet('Root', $fieldsTab, $groupsTab);
+		$tabSet->setTemplate('CMSTabSet');
+
+		// Activate tab based on request param
+		$actionParam = $this->request->param('Action');
+		if ($actionParam == 'fields') {
+			$fieldsTab->addExtraClass('ui-state-active');
+		} elseif ($actionParam == 'groups') {
+			$groupsTab->addExtraClass('ui-state-active');
+		}
+
+		// Form field list
+		$fields = new FieldList([$tabSet]);
+
+		// Add field to first tab
+		$fields->addFieldToTab('Root.Fields',
+			new EditableFieldEditor("Fields", 'Fields', "")
+		);
+
+		// Add field to second tab
+		$groupsConfig = GridFieldConfig_RecordEditor::create();
+		$groupsField = GridField::create(
+			'EditableFieldGroup',
+			singleton('Group')->i18n_plural_name(),
+			EditableFieldGroup::get(),
+			$groupsConfig
+		);
+		$component = $groupsConfig->getComponentByType('GridFieldAddNewButton');
+		$component->setButtonName(_t('EditableFieldAdmin.AddGroup', 'Add Group'));
+		$fields->addFieldToTab('Root.Groups', $groupsField);
 
 		// The edit form
 		$form = CMSForm::create($this, 'EditForm', $fields, $actions)->setHTMLID('Form_EditForm');
@@ -65,7 +98,7 @@ class EditableFieldAdmin extends LeftAndMain {
 		$form->disableDefaultAction();
 
 		// Form layout
-		$form->addExtraClass('cms-content cms-edit-form center ' . $this->BaseCSSClasses());
+		$form->addExtraClass('cms-content cms-edit-form center ss-tabset cms-tabset ' . $this->BaseCSSClasses());
 		$form->setTemplate($this->getTemplatesWithSuffix('_EditForm'));
 		$form->setAttribute('data-pjax-fragment', 'CurrentForm');
 

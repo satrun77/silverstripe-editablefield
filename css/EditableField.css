@@ -11,11 +11,19 @@
 ---------------------------------------- */
 .EditableFieldEditor .FieldList {
     padding: 10px 0;
+	margin: 0;
 }
 	.EditableFieldEditor .FieldList .EditableField {
 		margin: 2px;
 		padding: 3px 0;
+		background-color: transparent;
 		width: 100%;
+		border: 0 none;
+		border-bottom: 1px solid #d0d3d5 !important;
+		-webkit-box-shadow: 0 1px 0 rgba(245, 245, 245, 0.8);
+		-moz-box-shadow: 0 1px 0 rgba(245, 245, 245, 0.8);
+		-o-box-shadow: 0 1px 0 rgba(245, 245, 245, 0.8);
+		box-shadow: 0 1px 0 rgba(245, 245, 245, 0.8);
 	}
 		.EditableFieldEditor .FieldList .EditableField * {
 			display: inline;
@@ -31,11 +39,16 @@
 		}
 		.EditableFieldEditor .FieldList .EditableField .fieldActions {
 			float: left;
-			margin-top: 10px;
+			margin-top: 2px;
 		}
 			.EditableFieldEditor .FieldList .EditableField .fieldActions a {
-				padding: 0 5px 5px 20px;
+				color: #0073C1;
+				padding: 9px 10px 9px 20px;
 				font-size: 12px;
+				font-weight: normal;
+				text-shadow: none;
+				background-position: left center;
+				cursor: pointer;
 			}
 				.EditableFieldEditor .FieldList .EditableField .moreOptions {
 					background: url(../../cms/images/edit.gif) no-repeat top left;
@@ -74,6 +87,7 @@
 		}
 			.EditableFieldEditor .FieldList .EditableField .extraOptions * {
 				display: block;
+				font-weight: normal;
 			}
 				.EditableFieldEditor .FieldList .EditableField .extraOptions .handle {
 					float: left;
@@ -160,3 +174,6 @@
 			display: block;
 			overflow: hidden;
 		}
+#Show_Options {
+	border: 0 none;
+}
