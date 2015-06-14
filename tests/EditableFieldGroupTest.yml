@@ -1,0 +1,20 @@
+EditableField:
+    text-field:
+        Name: basictextname
+        Title: Basic Text Field
+
+    email-field:
+        Name: emailfield
+        Title: Email
+
+    numeric-field:
+        Name: numericfield
+        Title: Numeric
+
+EditableFieldGroup:
+  group-1:
+    Title: Group One
+    Fields: =>EditableField.text-field, =>EditableField.email-field, =>EditableField.numeric-field
+
+  group-empty:
+    Title: Group Empty
