@@ -6,8 +6,7 @@
  * @package editablefield
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
-class EditableFieldGroup extends DataObject
-{
+class EditableFieldGroup extends DataObject {
 	private static $db = [
 		"Title" => "Varchar(255)",
 	];
@@ -33,8 +32,7 @@ class EditableFieldGroup extends DataObject
 	 *
 	 * @return RequiredFields
 	 */
-	public function getCMSValidator()
-	{
+	public function getCMSValidator() {
 		return new RequiredFields('Title');
 	}
 
@@ -43,8 +41,7 @@ class EditableFieldGroup extends DataObject
 	 *
 	 * @return FieldList
 	 */
-	public function getCMSFields()
-	{
+	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
 		// Field visible on edit only
@@ -58,10 +55,10 @@ class EditableFieldGroup extends DataObject
 			$config
 				->getComponentByType('GridFieldDataColumns')
 				->setDisplayFields([
-					'Name'  => _t('ConfigurablePage.NAME', 'Name'),
-					'Title' => _t('ConfigurablePage.TITLE', 'Title'),
-					'Sort'  => _t('ConfigurablePage.SORT', 'Sort'),
-				]);
+					                   'Name'  => _t('ConfigurablePage.NAME', 'Name'),
+					                   'Title' => _t('ConfigurablePage.TITLE', 'Title'),
+					                   'Sort'  => _t('ConfigurablePage.SORT', 'Sort'),
+				                   ]);
 			$config->addComponent(
 				new GridFieldEditableManyManyExtraColumns(
 					['Sort' => 'Int']

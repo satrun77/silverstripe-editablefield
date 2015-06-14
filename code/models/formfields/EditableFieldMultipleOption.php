@@ -3,15 +3,16 @@
 /**
  * EditableFieldMultipleOption is a base class for multiple option fields to extend
  *
- * @see EditableFieldCheckboxGroup, EditableFieldDropdown
+ * @see     EditableFieldCheckboxGroup, EditableFieldDropdown
  * @package editablefield
- * @author silverstripe/userforms
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  silverstripe/userforms
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @method EditableFieldOption Options
  */
 class EditableFieldMultipleOption extends EditableField {
-	private static $has_many = array(
+	private static $has_many = [
 		"Options" => "EditableFieldOption"
-	);
+	];
 
 	/**
 	 * Deletes all the options attached to this field before deleting the
@@ -22,8 +23,8 @@ class EditableFieldMultipleOption extends EditableField {
 	public function delete() {
 		$options = $this->Options();
 
-		if($options) {
-			foreach($options as $option) {
+		if ($options) {
+			foreach ($options as $option) {
 				$option->delete();
 			}
 		}
@@ -40,8 +41,8 @@ class EditableFieldMultipleOption extends EditableField {
 	public function duplicate($doWrite = true) {
 		$clonedNode = parent::duplicate();
 
-		if($this->Options()) {
-			foreach($this->Options() as $field) {
+		if ($this->Options()) {
+			foreach ($this->Options() as $field) {
 				$newField = $field->duplicate();
 				$newField->ParentID = $clonedNode->ID;
 				$newField->write();
@@ -55,7 +56,7 @@ class EditableFieldMultipleOption extends EditableField {
 	 * On before saving this object we need to go through and keep an eye on
 	 * all our option fields that are related to this field in the form
 	 *
-	 * @param ArrayData
+	 * @param array
 	 */
 	public function populateFromPostData($data) {
 		parent::populateFromPostData($data);
@@ -64,8 +65,8 @@ class EditableFieldMultipleOption extends EditableField {
 		$fieldSet = $this->Options();
 
 		// go over all the current options and check if ID and Title still exists
-		foreach($fieldSet as $option) {
-			if(isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != "field-node-deleted") {
+		foreach ($fieldSet as $option) {
+			if (isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != "field-node-deleted") {
 				$option->populateFromPostData($data[$option->ID]);
 			} else {
 				$option->delete();

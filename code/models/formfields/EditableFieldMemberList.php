@@ -4,8 +4,8 @@
  * EditableFieldMemberList is an object representing member dropdown field created by CMS admin
  *
  * @package editablefield
- * @author silverstripe/userforms
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  silverstripe/userforms
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldMemberList extends EditableField {
 	private static $singular_name = 'Member List Field';
@@ -15,19 +15,20 @@ class EditableFieldMemberList extends EditableField {
 		$groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
 		$groups = DataObject::get("Group");
 
-		if($groups) {
+		if ($groups) {
 			$groups = $groups->map('ID', 'Title');
 		}
 
 		$fields = new FieldList(
-			new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableField.GROUP', 'Group'), $groups, $groupID)
+			new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableField.GROUP', 'Group'), $groups,
+			                  $groupID)
 		);
 
 		return $fields;
 	}
 
 	protected function initFormField() {
-		if($this->getSetting('GroupID')) {
+		if ($this->getSetting('GroupID')) {
 			$members = Member::map_in_groups($this->getSetting('GroupID'));
 
 			return new DropdownField($this->Name, $this->Title, $members);

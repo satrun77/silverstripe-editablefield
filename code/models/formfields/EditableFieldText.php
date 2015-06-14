@@ -4,8 +4,8 @@
  * EditableFieldText is an object representing text field created by CMS admin
  *
  * @package editablefield
- * @author silverstripe/userforms
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  silverstripe/userforms
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldText extends EditableField {
 	private static $singular_name = 'Text Field';
@@ -21,8 +21,11 @@ class EditableFieldText extends EditableField {
 
 		$extraFields = new FieldList(
 			new FieldGroup(
-			_t('EditableFieldText.TEXTLENGTH', 'Text length'), new NumericField($this->getSettingName('MinLength'), "", $min), new NumericField($this->getSettingName('MaxLength'), " - ", $max)
-			), new NumericField($this->getSettingName('Rows'), _t('EditableFieldText.NUMBERROWS', 'Number of rows'), $rows)
+				_t('EditableFieldText.TEXTLENGTH', 'Text length'),
+				new NumericField($this->getSettingName('MinLength'), "", $min),
+				new NumericField($this->getSettingName('MaxLength'), " - ", $max)
+			),
+			new NumericField($this->getSettingName('Rows'), _t('EditableFieldText.NUMBERROWS', 'Number of rows'), $rows)
 		);
 
 		$fields->merge($extraFields);
@@ -34,9 +37,10 @@ class EditableFieldText extends EditableField {
 	 * @return TextareaField|TextField
 	 */
 	protected function initFormField() {
-		if($this->getSetting('Rows') && $this->getSetting('Rows') > 1) {
+		if ($this->getSetting('Rows') && $this->getSetting('Rows') > 1) {
 			$taf = new TextareaField($this->Name, $this->Title);
 			$taf->setRows($this->getSetting('Rows'));
+
 			return $taf;
 		} else {
 			return new TextField($this->Name, $this->Title, null, $this->getSetting('MaxLength'));

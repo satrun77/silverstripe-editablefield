@@ -1,11 +1,12 @@
 <?php
 
 /**
- * EditableFieldLiteral is an object representing blank slate where you can add HTML / Images / Flash created by CMS admin
+ * EditableFieldLiteral is an object representing blank slate where you can add HTML / Images / Flash created by CMS
+ * admin
  *
  * @package editablefield
- * @author silverstripe/userforms
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  silverstripe/userforms
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldLiteral extends EditableField {
 	private static $singular_name = 'HTML Block';
@@ -32,7 +33,7 @@ class EditableFieldLiteral extends EditableField {
 		return new LiteralField("LiteralField[$this->ID]", "<div id='$this->Name' class='field text$classes'>
 				$label
 				<div class='middleColumn literalFieldArea'>" . $this->getSetting('Content') . "</div>" .
-			"</div>"
+		                                                 "</div>"
 		);
 	}
 

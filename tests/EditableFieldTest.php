@@ -3,72 +3,72 @@
 /**
  * EditableFieldTest contains test cases for test EditableField classes
  *
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  * @package editablefield
  */
 class EditableFieldTest extends FunctionalTest {
 	protected static $fixture_file = 'EditableFieldTest.yml';
-	protected $fields = array(
-		'radio-field' => array(
+	protected $fields = [
+		'radio-field'         => [
 			'class' => 'EditableFieldRadio',
 			'field' => 'OptionsetField'
-		),
-		'html-field' => array(
+		],
+		'html-field'          => [
 			'class' => 'EditableFieldLiteral',
 			'field' => 'LiteralField'
-		),
-		'numeric-field' => array(
+		],
+		'numeric-field'       => [
 			'class' => 'EditableFieldNumeric',
 			'field' => 'NumericField'
-		),
-		'email-field' => array(
+		],
+		'email-field'         => [
 			'class' => 'EditableFieldEmail',
 			'field' => 'EmailField'
-		),
-		'checkbox-1' => array(
+		],
+		'checkbox-1'          => [
 			'class' => 'EditableFieldCheckbox',
 			'field' => 'CheckboxField'
-		),
-		'department-dropdown' => array(
+		],
+		'department-dropdown' => [
 			'class' => 'EditableFieldDropdown',
 			'field' => 'DropdownField'
-		),
-		'heading-field' => array(
+		],
+		'heading-field'       => [
 			'class' => 'EditableFieldHeading',
 			'field' => 'HeaderField'
-		),
-		'dob-field' => array(
+		],
+		'dob-field'           => [
 			'class' => 'EditableFieldDate',
 			'field' => 'DateField'
-		),
-		'country-field' => array(
+		],
+		'country-field'       => [
 			'class' => 'EditableFieldCountryDropdown',
 			'field' => 'CountryDropdownField'
-		),
-		'member-field' => array(
+		],
+		'member-field'        => [
 			'class' => 'EditableFieldMemberList',
 			'field' => 'DropdownField'
-		),
-		'pagetype-field' => array(
+		],
+		'pagetype-field'      => [
 			'class' => 'EditableFieldPageTypeList',
 			'field' => 'DropdownField'
-		),
-		'basic-text' => array(
+		],
+		'basic-text'          => [
 			'class' => 'EditableFieldText',
 			'field' => 'TextField'
-		),
-		'text-area' => array(
+		],
+		'text-area'           => [
 			'class' => 'EditableFieldText',
 			'field' => 'TextareaField'
-		),
-		'checkbox-group' => array(
+		],
+		'checkbox-group'      => [
 			'class' => 'EditableFieldCheckboxGroup',
 			'field' => 'CheckboxSetField'
-		),
-	);
+		],
+	];
 
 	public function testGetFormField() {
-		foreach($this->fields as $name => $field) {
+		foreach ($this->fields as $name => $field) {
 			$object = $this->objFromFixture($field['class'], $name);
 			$this->assertInstanceOf($field['field'], $object->getFormField());
 		}
@@ -93,7 +93,7 @@ class EditableFieldTest extends FunctionalTest {
 
 		$this->assertEquals($clone->Options()->Count(), $dropdown->Options()->Count());
 
-		foreach($clone->Options() as $option) {
+		foreach ($clone->Options() as $option) {
 			$orginal = $dropdown->Options()->find('Title', $option->Title);
 
 			$this->assertEquals($orginal->Sort, $option->Sort);

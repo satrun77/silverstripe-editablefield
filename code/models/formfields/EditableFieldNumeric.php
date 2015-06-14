@@ -4,8 +4,8 @@
  * EditableFieldNumeric is an object representing numeric field created by CMS admin
  *
  * @package editablefield
- * @author silverstripe/userforms
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  silverstripe/userforms
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldNumeric extends EditableField {
 	private static $singular_name = 'Numeric Field';
@@ -25,7 +25,8 @@ class EditableFieldNumeric extends EditableField {
 		$max = ($this->getSetting('MaxValue')) ? $this->getSetting('MaxValue') : '';
 
 		$extraFields = new FieldList(
-			new NumericField($this->getSettingName('MinValue'), _t('EditableField.MINVALUE', 'Min Value'), $min), new NumericField($this->getSettingName('MaxValue'), _t('EditableField.MAXVALUE', 'Max Value'), $max)
+			new NumericField($this->getSettingName('MinValue'), _t('EditableField.MINVALUE', 'Min Value'), $min),
+			new NumericField($this->getSettingName('MaxValue'), _t('EditableField.MAXVALUE', 'Max Value'), $max)
 		);
 
 		$fields->merge($extraFields);

@@ -3,7 +3,7 @@
 /**
  * EditableFieldEditor is a form field that lists editable fields and allows to modify their data
  *
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  * @package editablefield
  */
 class EditableFieldEditor extends FormField {
@@ -16,9 +16,10 @@ class EditableFieldEditor extends FormField {
 
 	/**
 	 * (non-PHPdoc)
+	 *
 	 * @see FormField::FieldHolder()
 	 */
-	public function FieldHolder($properties = array()) {
+	public function FieldHolder($properties = []) {
 		return $this->renderWith("EditableFieldEditor", $properties);
 	}
 
@@ -28,9 +29,10 @@ class EditableFieldEditor extends FormField {
 	 * @return DataList
 	 */
 	public function Fields() {
-		if(null === $this->fields) {
+		if (null === $this->fields) {
 			$this->fields = $this->form->getRecord()->EditableFieldEditor();
 		}
+
 		return $this->fields;
 	}
 

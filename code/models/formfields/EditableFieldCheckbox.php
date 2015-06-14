@@ -4,8 +4,8 @@
  * EditableFieldCheckbox is an object representing a checkbox created by CMS admin
  *
  * @package editablefield
- * @author silverstripe/userforms
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  silverstripe/userforms
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldCheckbox extends EditableField {
 	private static $singular_name = 'Checkbox Field';
@@ -13,7 +13,9 @@ class EditableFieldCheckbox extends EditableField {
 
 	public function getFieldConfiguration() {
 		$options = parent::getFieldConfiguration();
-		$options->push(new CheckboxField("Fields[$this->ID][CustomSettings][Default]", _t('EditableField.CHECKEDBYDEFAULT', 'Checked by Default?'), $this->getSetting('Default')));
+		$options->push(new CheckboxField("Fields[$this->ID][CustomSettings][Default]",
+		                                 _t('EditableField.CHECKEDBYDEFAULT', 'Checked by Default?'),
+		                                 $this->getSetting('Default')));
 
 		return $options;
 	}

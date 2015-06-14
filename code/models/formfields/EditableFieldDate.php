@@ -2,10 +2,10 @@
 
 /**
  * EditableFieldDate is an object representing date field created by CMS admin
- * 
+ *
  * @package editablefield
- * @author silverstripe/userforms
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  silverstripe/userforms
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldDate extends EditableField {
 	private static $singular_name = 'Date Field';
@@ -23,7 +23,7 @@ class EditableFieldDate extends EditableField {
 	public function populateFromPostData($data) {
 		$fieldPrefix = 'Default-';
 
-		if(empty($data['Default']) && !empty($data[$fieldPrefix . 'Year']) && !empty($data[$fieldPrefix . 'Month']) && !empty($data[$fieldPrefix . 'Day'])) {
+		if (empty($data['Default']) && !empty($data[$fieldPrefix . 'Year']) && !empty($data[$fieldPrefix . 'Month']) && !empty($data[$fieldPrefix . 'Day'])) {
 			$data['Default'] = $data['Year'] . '-' . $data['Month'] . '-' . $data['Day'];
 		}
 

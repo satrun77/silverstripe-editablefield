@@ -4,8 +4,15 @@
  * EditableField is a base class for editable fields to extend
  *
  * @package editablefield
- * @author silverstripe/userforms
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  silverstripe/userforms
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @property string $Title
+ * @property string $Default
+ * @property int    $Required
+ * @property string $Name
+ * @property string $CustomErrorMessage
+ * @property string $CustomSettings
+ * @method string ClassName()
  */
 class EditableField extends DataObject {
 	/**
@@ -13,17 +20,17 @@ class EditableField extends DataObject {
 	 *
 	 * @var array
 	 */
-	public static $allowed_css = array();
-	private static $db = array(
-		"Name" => "Varchar",
-		"Title" => "Varchar(255)",
-		"Default" => "Varchar",
-		"Required" => "Boolean",
+	public static $allowed_css = [];
+	private static $db = [
+		"Name"               => "Varchar",
+		"Title"              => "Varchar(255)",
+		"Default"            => "Varchar",
+		"Required"           => "Boolean",
 		"CustomErrorMessage" => "Varchar(255)",
-		"CustomRules" => "Text",
-		"CustomSettings" => "Text",
-		"CustomParameter" => "Varchar(200)"
-	);
+		"CustomRules"        => "Text",
+		"CustomSettings"     => "Text",
+		"CustomParameter"    => "Varchar(200)"
+	];
 	private static $singular_name = 'Editable Field';
 	private static $plural_name = 'Editable Fields';
 
@@ -50,16 +57,16 @@ class EditableField extends DataObject {
 	 * @return Array Return all the Settings
 	 */
 	public function getSettings() {
-		return (!empty($this->CustomSettings)) ? unserialize($this->CustomSettings) : array();
+		return (!empty($this->CustomSettings)) ? unserialize($this->CustomSettings) : [];
 	}
 
 	/**
 	 * Set the custom settings for this field as we store the minor details in
 	 * a serialized array in the database
 	 *
-	 * @param Array the custom settings
+	 * @param array $settings the custom settings
 	 */
-	public function setSettings($settings = array()) {
+	public function setSettings($settings = []) {
 		$this->CustomSettings = serialize($settings);
 	}
 
@@ -67,8 +74,8 @@ class EditableField extends DataObject {
 	 * Set a given field setting. Appends the option to the settings or overrides
 	 * the existing value
 	 *
-	 * @param String key
-	 * @param String value
+	 * @param string $key
+	 * @param string $value
 	 */
 	public function setSetting($key, $value) {
 		$settings = $this->getSettings();
@@ -80,11 +87,11 @@ class EditableField extends DataObject {
 	/**
 	 * Set the allowed css classes for the extraClass custom setting
 	 *
-	 * @param array The permissible CSS classes to add
+	 * @param array $allowed The permissible CSS classes to add
 	 */
 	public function setAllowedCss(array $allowed) {
-		if(is_array($allowed)) {
-			foreach($allowed as $k => $v) {
+		if (is_array($allowed)) {
+			foreach ($allowed as $k => $v) {
 				self::$allowed_css[$k] = (!is_null($v)) ? $v : $k;
 			}
 		}
@@ -94,17 +101,18 @@ class EditableField extends DataObject {
 	 * Return just one custom setting or empty string if it does
 	 * not exist
 	 *
-	 * @param String Value to use as key
 	 * @param string $setting
+	 *
 	 * @return String
 	 */
 	public function getSetting($setting) {
 		$settings = $this->getSettings();
-		if(isset($settings) && count($settings) > 0) {
-			if(isset($settings[$setting])) {
+		if (isset($settings) && count($settings) > 0) {
+			if (isset($settings[$setting])) {
 				return $settings[$setting];
 			}
 		}
+
 		return '';
 	}
 
@@ -180,7 +188,8 @@ class EditableField extends DataObject {
 	 * Return the base name for this form field in the
 	 * form builder. Optionally returns the name with the given field
 	 *
-	 * @param String Field Name
+	 * @param string|boolean $field
+	 *
 	 * @return String
 	 */
 	public function getFieldName($field = false) {
@@ -190,8 +199,8 @@ class EditableField extends DataObject {
 	/**
 	 * Generate a name for the Setting field
 	 *
-	 * @param String name of the setting
 	 * @param string $field
+	 *
 	 * @return String
 	 */
 	public function getSettingName($field) {
@@ -209,22 +218,26 @@ class EditableField extends DataObject {
 	 * called
 	 *
 	 * @param array $data
+	 *
+	 * @throws ValidationException
 	 */
 	public function populateFromPostData($data) {
 		$this->Title = (isset($data['Title'])) ? $data['Title'] : "";
 		$this->Default = (isset($data['Default'])) ? $data['Default'] : "";
 		$this->Required = !empty($data['Required']) ? 1 : 0;
-		$this->Name = (isset($data['Name'])) ? preg_replace("/[^a-zA-Z0-9_]+/", "", $data['Name']) : $this->class . $this->ID;
+		$this->Name = (isset($data['Name'])) ? preg_replace("/[^a-zA-Z0-9_]+/", "",
+		                                                    $data['Name']) : $this->class . $this->ID;
 		$this->CustomErrorMessage = (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
 		$this->CustomSettings = "";
 
 		$exists = DataObject::get($this->class)->filter('Name', $this->Name)->exclude('ID', $this->ID);
-		if($exists->count()) {
-			throw new ValidationException(_t('EditableField.UNIQUENAME', 'Field name "{name}" must be unique', '', array('name' => $this->Name)));
+		if ($exists->count()) {
+			throw new ValidationException(_t('EditableField.UNIQUENAME', 'Field name "{name}" must be unique', '',
+			                                 ['name' => $this->Name]));
 		}
 
 		// custom settings
-		if(isset($data['CustomSettings'])) {
+		if (isset($data['CustomSettings'])) {
 			$this->setSettings($data['CustomSettings']);
 		}
 
@@ -241,29 +254,34 @@ class EditableField extends DataObject {
 	public function getFieldConfiguration() {
 		$extraClass = ($this->getSetting('ExtraClass')) ? $this->getSetting('ExtraClass') : '';
 
-		if(is_array(self::$allowed_css) && !empty(self::$allowed_css)) {
-			foreach(self::$allowed_css as $k => $v) {
-				if(!is_array($v))
+		if (is_array(self::$allowed_css) && !empty(self::$allowed_css)) {
+			$cssList = [];
+			foreach (self::$allowed_css as $k => $v) {
+				if (!is_array($v)) {
 					$cssList[$k] = $v;
-				elseif($k == $this->ClassName())
+				} elseif ($k == $this->ClassName()) {
 					$cssList = array_merge($cssList, $v);
+				}
 			}
 
 			$ec = new DropdownField(
-				$this->getSettingName('ExtraClass'), _t('EditableField.EXTRACLASSA', 'Extra Styling/Layout'), $cssList, $extraClass
+				$this->getSettingName('ExtraClass'), _t('EditableField.EXTRACLASSA', 'Extra Styling/Layout'), $cssList,
+				$extraClass
 			);
 		} else {
 			$ec = new TextField(
-				$this->getSettingName('ExtraClass'), _t('EditableField.EXTRACLASSB', 'Extra css Class - separate multiples with a space'), $extraClass
+				$this->getSettingName('ExtraClass'),
+				_t('EditableField.EXTRACLASSB', 'Extra css Class - separate multiples with a space'), $extraClass
 			);
 		}
 
 		$right = new TextField(
-			$this->getSettingName('RightTitle'), _t('EditableField.RIGHTTITLE', 'Right Title'), $this->getSetting('RightTitle')
+			$this->getSettingName('RightTitle'), _t('EditableField.RIGHTTITLE', 'Right Title'),
+			$this->getSetting('RightTitle')
 		);
 
 		$fields = FieldList::create(
-				$ec, $right
+			$ec, $right
 		);
 		$this->extend('updateFieldConfiguration', $fields);
 
@@ -278,7 +296,10 @@ class EditableField extends DataObject {
 	 */
 	public function getFieldValidationOptions() {
 		$fields = new FieldList(
-			new CheckboxField($this->getFieldName('Required'), _t('EditableField.REQUIRED', 'Is this field Required?'), $this->Required), new TextField($this->getFieldName('CustomErrorMessage'), _t('EditableField.CUSTOMERROR', 'Custom Error Message'), $this->CustomErrorMessage)
+			new CheckboxField($this->getFieldName('Required'), _t('EditableField.REQUIRED', 'Is this field Required?'),
+			                  $this->Required), new TextField($this->getFieldName('CustomErrorMessage'),
+			                                                  _t('EditableField.CUSTOMERROR', 'Custom Error Message'),
+			                                                  $this->CustomErrorMessage)
 		);
 
 		$this->extend('updateFieldValidationOptions', $fields);
@@ -292,9 +313,10 @@ class EditableField extends DataObject {
 	 * @return FormField
 	 */
 	public function getFormField() {
-		if(null === $this->field) {
+		if (null === $this->field) {
 			$this->field = $this->initFormField();
 		}
+
 		return $this->field;
 	}
 
@@ -304,7 +326,7 @@ class EditableField extends DataObject {
 	 * @return FormField
 	 */
 	protected function initFormField() {
-		throw DomainException(sprintf('%s must be implemented by the class %s', __METHOD__, $this->class));
+		throw new DomainException(sprintf('%s must be implemented by the class %s', __METHOD__, $this->class));
 	}
 
 	/**
@@ -315,7 +337,7 @@ class EditableField extends DataObject {
 	 */
 	public function getErrorMessage() {
 		$title = strip_tags("'" . ($this->Title ? $this->Title : $this->Name) . "'");
-		$standard = _t('Form.FIELDISREQUIRED', '{name} is required', array('name' => $title));
+		$standard = _t('Form.FIELDISREQUIRED', '{name} is required', ['name' => $title]);
 
 		// only use CustomErrorMessage if it has a non empty value
 		$errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;

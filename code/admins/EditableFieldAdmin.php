@@ -3,23 +3,23 @@
 /**
  * EditableFieldAdmin is an admin class for managing the editable fields in the system.
  *
- * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  * @package editablefield
  */
 class EditableFieldAdmin extends LeftAndMain {
 	private static $url_segment = 'editablefield';
 	private static $menu_title = 'Editable fields';
 	private static $tree_class = 'EditableField';
-	private static $url_handlers = array(
+	private static $url_handlers = [
 		'$Action!/$ID' => '$Action'
-	);
-	private static $allowed_actions = array(
+	];
+	private static $allowed_actions = [
 		'SearchForm',
 		'filter',
 		'doAdd',
 		'delete',
 		'addOptionField'
-	);
+	];
 
 	/**
 	 * List of current displayed fields
@@ -30,6 +30,7 @@ class EditableFieldAdmin extends LeftAndMain {
 
 	/**
 	 * (non-PHPdoc)
+	 *
 	 * @see LeftAndMain::init()
 	 */
 	public function init() {
@@ -74,7 +75,7 @@ class EditableFieldAdmin extends LeftAndMain {
 
 		// Add field to first tab
 		$fields->addFieldToTab('Root.Fields',
-			new EditableFieldEditor("Fields", 'Fields', "")
+		                       new EditableFieldEditor("Fields", 'Fields', "")
 		);
 
 		// Add field to second tab
@@ -111,32 +112,38 @@ class EditableFieldAdmin extends LeftAndMain {
 	/**
 	 * Action to add a field to the field editor. Called via an ajax get
 	 *
+	 * @param SS_HTTPRequest $request
+	 *
+	 * @return SS_HTTPResponse|void
+	 * @throws SS_HTTPResponse_Exception
+	 * @throws ValidationException
 	 * @return bool|string
 	 */
 	public function doAdd($request) {
 		// Check security token
-		if(!SecurityToken::inst()->checkRequest($request)) {
+		if (!SecurityToken::inst()->checkRequest($request)) {
 			return $this->httpError(400);
 		}
 
 		// Can user create a feild
-		if(!$this->canCreate()) {
+		if (!$this->canCreate()) {
 			return Security::permissionFailure();
 		}
 
 		// EditableField type is required
 		$className = $this->request->postVar('Type');
-		if(!$className) {
-			throw new ValidationException(_t('EditableFieldAdmin.MISSINGFIELDTYPE', 'Please select a field type to created'));
+		if (!$className) {
+			throw new ValidationException(_t('EditableFieldAdmin.MISSINGFIELDTYPE',
+			                                 'Please select a field type to created'));
 		}
 
 		// Class name must be a subclass of EditableField
 		// Then instantiate the class, create new data, and render display row
-		if(is_subclass_of($className, "EditableField")) {
+		if (is_subclass_of($className, "EditableField")) {
 			$field = Object::create($className);
 
 			$newID = $this->request->postVar('NewID');
-			if(empty($newID)) {
+			if (empty($newID)) {
 				$newID = $field->ID;
 			}
 			$field->Name = $field->class . $newID;
@@ -160,21 +167,22 @@ class EditableFieldAdmin extends LeftAndMain {
 	/**
 	 * Action for saving the form fields listed in field editor
 	 *
-	 * @param array $record
+	 * @param array   $record
 	 * @param CMSForm $form
+	 *
 	 * @return SS_HTTPResponse
 	 */
 	public function save($record, $form) {
 		// Can user edit fields details
-		if(!$this->canEdit()) {
+		if (!$this->canEdit()) {
 			return Security::permissionFailure();
 		}
 
 		// Update submitted fields details
-		if(!empty($record['Fields']) && is_array($record['Fields'])) {
-			foreach($record['Fields'] as $newEditableID => $newEditableData) {
+		if (!empty($record['Fields']) && is_array($record['Fields'])) {
+			foreach ($record['Fields'] as $newEditableID => $newEditableData) {
 				// Field ID is the index of the item
-				if(!is_numeric($newEditableID)) {
+				if (!is_numeric($newEditableID)) {
 					continue;
 				}
 
@@ -182,7 +190,7 @@ class EditableFieldAdmin extends LeftAndMain {
 				$editable = DataObject::get_by_id('EditableField', $newEditableID);
 
 				// If it exists in the db update it
-				if($editable) {
+				if ($editable) {
 					$editable->populateFromPostData($newEditableData);
 				}
 			}
@@ -193,30 +201,32 @@ class EditableFieldAdmin extends LeftAndMain {
 
 		// Response message
 		$this->response->addHeader('X-Status', rawurlencode(_t('LeftAndMain.SAVEDUP', 'Saved.')));
+
 		return $this->getResponseNegotiator()->respond($this->request);
 	}
 
 	/**
 	 * Action to delete form field
 	 *
-	 * @param array $record
+	 * @param array   $record
 	 * @param CMSForm $form
+	 *
 	 * @return SS_HTTPResponse
 	 */
 	public function delete($record, $form) {
 		// Can user delete the field
-		if(!$this->canDelete()) {
+		if (!$this->canDelete()) {
 			return Security::permissionFailure();
 		}
 
 		// Field ID
-		$fieldID = (int) key($record['Fields']);
+		$fieldID = (int)key($record['Fields']);
 
 		// Get it from the db
 		$editable = DataObject::get_by_id('EditableField', $fieldID);
 
 		// If it exists in the db delete it
-		if(!$editable) {
+		if (!$editable) {
 			return $this->httpError(404, _t('EditableFieldAdmin.INVALIDFIELDTYPE', 'Invalid field type selected'));
 		}
 		$editable->delete();
@@ -226,31 +236,33 @@ class EditableFieldAdmin extends LeftAndMain {
 
 		// Response message
 		$this->response->addHeader('X-Status', rawurlencode(_t('LeftAndMain.DELETED', 'Deleted.')));
+
 		return $this->getResponseNegotiator()->respond($this->request);
 	}
 
 	/**
 	 * Action to create field option (ie. dropdown, checkbox). Called from ajax request.
 	 *
-	 * @param array $record
-	 * @param CMSForm $form
-	 * @return bool|string
+	 * @param $record
+	 *
+	 * @return bool|SS_HTTPResponse|void
+	 * @throws SS_HTTPResponse_Exception
 	 */
 	public function addOptionField($record) {
 		// Check security token
-		if(!SecurityToken::inst()->checkRequest($this->request)) {
+		if (!SecurityToken::inst()->checkRequest($this->request)) {
 			return $this->httpError(400);
 		}
 
 		// Can user edit fields details
-		if(!$this->canEdit()) {
+		if (!$this->canEdit()) {
 			return Security::permissionFailure();
 		}
 
 		// The parent id of the option field (the id of the field (ie. dropdown)
 		$parent = (isset($record['Parent'])) ? $record['Parent'] : false;
 
-		if($parent) {
+		if ($parent) {
 			$parentObj = EditableField::get()->byID($parent);
 			$optionClass = ($parentObj && $parentObj->exists()) ? $parentObj->getRelationClass('Options') : 'EditableFieldOption';
 
@@ -259,11 +271,11 @@ class EditableFieldAdmin extends LeftAndMain {
 			$sqlQuery = $sqlQuery
 				->setSelect("MAX(\"Sort\")")
 				->setFrom("\"EditableFieldOption\"")
-				->setWhere("\"ParentID\" = " . (int) $parent);
+				->setWhere("\"ParentID\" = " . (int)$parent);
 
 			$sort = $sqlQuery->execute()->value() + 1;
 
-			if($parent) {
+			if ($parent) {
 				$object = Injector::inst()->create($optionClass);
 				$object->write();
 				$object->ParentID = $parent;
@@ -293,11 +305,12 @@ class EditableFieldAdmin extends LeftAndMain {
 		// Submit and reset buttons
 		$actions = new FieldList(
 			FormAction::create('doSearch', _t('CMSMain_left_ss.APPLY_FILTER', 'Apply Filter'))
-				->addExtraClass('ss-ui-action-constructive'), Object::create('ResetFormAction', 'clear', _t('CMSMain_left_ss.RESET', 'Reset'))
+				->addExtraClass('ss-ui-action-constructive'),
+			Object::create('ResetFormAction', 'clear', _t('CMSMain_left_ss.RESET', 'Reset'))
 		);
 
 		// Use <button> to allow full jQuery UI styling on the all of the Actions
-		foreach($actions->dataFields() as $action) {
+		foreach ($actions->dataFields() as $action) {
 			$action->setUseButtonTag(true);
 		}
 
@@ -369,21 +382,21 @@ class EditableFieldAdmin extends LeftAndMain {
 	 */
 	public function getCreatableFields() {
 		$fields = ClassInfo::subclassesFor('EditableField');
-		$output = array();
+		$output = [];
 
-		if($fields) {
+		if ($fields) {
 			array_shift($fields); // get rid of subclass 0
 			asort($fields); // get in order
 
-			foreach($fields as $field => $title) {
+			foreach ($fields as $field => $title) {
 				// Skip an abstract class
-				if($field == "EditableFieldMultipleOption") {
+				if ($field == "EditableFieldMultipleOption") {
 					continue;
 				}
 
 				// Get the nice title and strip out field
 				$niceTitle = _t($field . '.SINGULARNAME', $title);
-				if($niceTitle) {
+				if ($niceTitle) {
 					$output[$field] = $niceTitle;
 				}
 			}
@@ -398,13 +411,13 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * @return DataList
 	 */
 	public function EditableFieldEditor() {
-		if(null === $this->formFields) {
+		if (null === $this->formFields) {
 			$this->formFields = DataObject::get('EditableField')->limit(50)->sort('Title', 'ASC');
 		}
 
 		$query = $this->request->requestVar('q');
-		if(!empty($query['Term'])) {
-			$filters = array_fill_keys(array('Name:PartialMatch', 'Title:PartialMatch'), $query['Term']);
+		if (!empty($query['Term'])) {
+			$filters = array_fill_keys(['Name:PartialMatch', 'Title:PartialMatch'], $query['Term']);
 			$this->formFields = $this->formFields->filterAny($filters)->sort('Title', 'ASC');
 		}
 
@@ -417,37 +430,40 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * @see LeftAndMain::canView()
 	 */
 	public function canView($member = null) {
-		return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+		return (boolean)Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
 	}
 
 	/**
 	 * Whether or not the user can edit the data in this object
 	 *
 	 * @param Member $member
+	 *
 	 * @return boolean
 	 */
 	public function canEdit($member = null) {
-		return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+		return (boolean)Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
 	}
 
 	/**
 	 * Whether or not the user can delete the data in this object
 	 *
 	 * @param Member $member
+	 *
 	 * @return boolean
 	 */
 	public function canDelete($member = null) {
-		return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+		return (boolean)Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
 	}
 
 	/**
 	 * Whether or not the user can create data in this object
 	 *
 	 * @param Member $member
+	 *
 	 * @return boolean
 	 */
 	public function canCreate($member = null) {
-		return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+		return (boolean)Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
 	}
 
 }
