@@ -384,7 +384,7 @@ class EditableFieldAdmin extends LeftAndMain {
 		$fields = ClassInfo::subclassesFor('EditableField');
 		$output = [];
 
-		if ($fields) {
+		if (!empty($fields)) {
 			array_shift($fields); // get rid of subclass 0
 			asort($fields); // get in order
 
