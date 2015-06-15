@@ -150,13 +150,7 @@ class EditableField extends DataObject {
 	 * @return TextField
 	 */
 	public function TitleField() {
-		$label = _t('EditableField.FIELDTITLE', 'Field title');
-
-		$field = new TextField('Title', $label, $this->getField('Title'));
-		$field->setName($this->getFieldName('Title'));
-		$field->setAttribute('placeholder', $label);
-
-		return $field;
+		return $this->getTextField('Title', 'Field title');
 	}
 
 	/**
@@ -165,10 +159,24 @@ class EditableField extends DataObject {
 	 * @return TextField
 	 */
 	public function NameField() {
-		$label = _t('EditableField.FIELDNAME', 'Field name');
+		$field = $this->getTextField('Name', 'Field name');
+		$field->addExtraClass('small');
 
-		$field = new TextField('Name', $label, $this->getField('Name'));
-		$field->setName($this->getFieldName('Name'));
+		return $field;
+	}
+
+	/**
+	 * Generate TextField object
+	 *
+	 * @param string $name
+	 * @param string $title
+	 * @return TextField 
+	 */
+	protected function getTextField($name, $title) {
+		$label = _t('EditableField.FIELDNAME', $title);
+
+		$field = new TextField($name, $label, $this->getField($name));
+		$field->setName($this->getFieldName($name));
 		$field->addExtraClass('small');
 		$field->setAttribute('placeholder', $label);
 
