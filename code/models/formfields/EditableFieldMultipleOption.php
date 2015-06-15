@@ -7,7 +7,9 @@
  * @package editablefield
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
- * @method EditableFieldOption Options
+ * @method  HasManyList Options()
+ * @property string $Name
+ * @property string $Title
  */
 class EditableFieldMultipleOption extends EditableField {
 	private static $has_many = [
@@ -90,7 +92,8 @@ class EditableFieldMultipleOption extends EditableField {
 	 * @return FormField
 	 */
 	protected function initFormField() {
-		return user_error('Please implement getFormField() on ' . $this->class, E_USER_ERROR);
-	}
+		$options = $this->Options()->map('EscapedTitle', 'Title');
 
+		return new OptionsetField($this->Name, $this->Title, $options);
+	}
 }
