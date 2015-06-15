@@ -6,7 +6,7 @@
  * @package editablefield
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
- * @method EditableFieldOption Options
+ * @method HasManyList Options()
  */
 class EditableFieldCheckboxGroup extends EditableFieldMultipleOption {
 	private static $singular_name = "Checkbox Group";
