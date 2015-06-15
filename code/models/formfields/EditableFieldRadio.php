@@ -5,7 +5,7 @@
  *
  * @author silverstripe/userforms
  * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
- * @method EditableFieldOption Options
+ * @method EditableFieldOption Options()
  * @property string $Name
  * @property string $Title
  */
