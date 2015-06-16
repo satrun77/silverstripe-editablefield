@@ -5,6 +5,8 @@
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  * @package editablefield
+ * @property int    $ID
+ * @property string $Name
  */
 class EditableFieldAdmin extends LeftAndMain {
 	private static $url_segment = 'editablefield';
@@ -140,10 +142,11 @@ class EditableFieldAdmin extends LeftAndMain {
 		// Class name must be a subclass of EditableField
 		// Then instantiate the class, create new data, and render display row
 		if (is_subclass_of($className, "EditableField")) {
+			/** @var EditableField $field */
 			$field = Object::create($className);
 
 			$newID = $this->request->postVar('NewID');
-			if (empty($newID)) {
+			if ($newID > 0) {
 				$newID = $field->ID;
 			}
 			$field->Name = $field->class . $newID;
