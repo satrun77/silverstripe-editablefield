@@ -13,6 +13,7 @@
  * @property string $CustomErrorMessage
  * @property string $CustomSettings
  * @method string ClassName()
+ * @method string EditSegment()
  */
 class EditableField extends DataObject {
 	/**
