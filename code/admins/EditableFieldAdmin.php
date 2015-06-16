@@ -119,7 +119,7 @@ class EditableFieldAdmin extends LeftAndMain {
 	 * @return SS_HTTPResponse|void
 	 * @throws SS_HTTPResponse_Exception
 	 * @throws ValidationException
-	 * @return bool|string
+	 * @return bool|string|HTMLText
 	 */
 	public function doAdd($request) {
 		// Check security token
