@@ -5,6 +5,7 @@
  *
  * @package editablefield
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ * @method ManyManyList Fields()
  */
 class EditableFieldGroup extends DataObject {
 	private static $db = [
