@@ -12,7 +12,12 @@
 .EditableFieldEditor .FieldList {
     padding: 10px 0;
 	margin: 0;
+	float: left;
+	width: 100%;
 }
+	.EditableFieldEditor .FieldList a:hover {
+		text-decoration: underline;
+	}
 	.EditableFieldEditor .FieldList .EditableField {
 		margin: 2px;
 		padding: 3px 0;
