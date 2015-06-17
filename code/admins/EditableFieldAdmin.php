@@ -116,7 +116,6 @@ class EditableFieldAdmin extends LeftAndMain {
 	 *
 	 * @param SS_HTTPRequest $request
 	 *
-	 * @return SS_HTTPResponse|void
 	 * @throws SS_HTTPResponse_Exception
 	 * @throws ValidationException
 	 * @return bool|string|HTMLText
