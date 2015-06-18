@@ -19,6 +19,7 @@ class EditableFieldAdmin extends LeftAndMain {
 		'delete',
 		'addOptionField'
 	];
+	private static $menu_icon = 'editablefield/images/icon.png';
 
 	/**
 	 * List of current displayed fields
