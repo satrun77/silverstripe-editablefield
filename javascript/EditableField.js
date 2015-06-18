@@ -134,7 +134,7 @@
 					url: url,
 					data: formData,
 					success: function(data) {
-						$('#Form_EditForm .cms-content-fields').html($(data.CurrentForm).find('.cms-content-fields').html());
+						$('#Form_EditForm .EditableFieldEditor').html($(data.CurrentForm).find('.EditableFieldEditor').html());
 					},
 					error: function(e) {
 					}
