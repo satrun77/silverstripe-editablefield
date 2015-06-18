@@ -68,11 +68,6 @@ class EditableFieldGroup extends DataObject {
 			);
 			$field = new GridField('Fields', 'Fields', $this->Fields(), $config);
 			$fields->addFieldToTab('Root.Fields', $field);
-
-			// Remove Configurable Page Tab
-			if (!$this->ConfigurablePages) {
-				$fields->removeByName('ConfigurablePages');
-			}
 		}
 
 		return $fields;
