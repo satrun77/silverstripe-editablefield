@@ -12,9 +12,6 @@ class EditableFieldAdmin extends LeftAndMain {
 	private static $url_segment = 'editablefield';
 	private static $menu_title = 'Editable fields';
 	private static $tree_class = 'EditableField';
-	private static $url_handlers = [
-		'$Action!/$ID' => '$Action'
-	];
 	private static $allowed_actions = [
 		'SearchForm',
 		'filter',
