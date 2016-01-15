@@ -7,16 +7,18 @@
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
-class EditableFieldCountryDropdown extends EditableField {
-	private static $singular_name = 'Country Dropdown';
-	private static $plural_name = 'Country Dropdowns';
+class EditableFieldCountryDropdown extends EditableField
+{
+    private static $singular_name = 'Country Dropdown';
+    private static $plural_name = 'Country Dropdowns';
 
-	protected function initFormField() {
-		return new CountryDropdownField($this->Name, $this->Title);
-	}
+    protected function initFormField()
+    {
+        return new CountryDropdownField($this->Name, $this->Title);
+    }
 
-	public function getIcon() {
-		return 'editablefield/images/formfields/editablefielddropdown.png';
-	}
-
+    public function getIcon()
+    {
+        return 'editablefield/images/formfields/editablefielddropdown.png';
+    }
 }

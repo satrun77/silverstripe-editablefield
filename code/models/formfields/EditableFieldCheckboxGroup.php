@@ -8,15 +8,16 @@
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  * @method HasManyList Options()
  */
-class EditableFieldCheckboxGroup extends EditableFieldMultipleOption {
-	private static $singular_name = "Checkbox Group";
-	private static $plural_name = "Checkbox Groups";
+class EditableFieldCheckboxGroup extends EditableFieldMultipleOption
+{
+    private static $singular_name = "Checkbox Group";
+    private static $plural_name = "Checkbox Groups";
 
-	protected function initFormField() {
-		$optionSet = $this->Options();
-		$optionMap = ($optionSet) ? $optionSet->map('EscapedTitle', 'Title') : [];
+    protected function initFormField()
+    {
+        $optionSet = $this->Options();
+        $optionMap = ($optionSet) ? $optionSet->map('EscapedTitle', 'Title') : [];
 
-		return new CheckboxSetField($this->Name, $this->Title, $optionMap);
-	}
-
+        return new CheckboxSetField($this->Name, $this->Title, $optionMap);
+    }
 }
