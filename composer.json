@@ -20,5 +20,6 @@
 	},
 	"support": {
 		"issues": "https://github.com/satrun77/silverstripe-editablefield/issues"
-	}
+	},
+	"minimum-stability": "dev"
 }
