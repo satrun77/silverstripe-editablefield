@@ -1,16 +1,17 @@
 <?php
 
 /**
- * EditableFieldNumeric is an object representing numeric field created by CMS admin
+ * EditableFieldNumeric is an object representing numeric field created by CMS admin.
  *
  * @package editablefield
+ *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldNumeric extends EditableField
 {
     private static $singular_name = 'Numeric Field';
-    private static $plural_name = 'Numeric Fields';
+    private static $plural_name   = 'Numeric Fields';
 
     protected function initFormField()
     {

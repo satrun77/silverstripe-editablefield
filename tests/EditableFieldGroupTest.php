@@ -1,9 +1,10 @@
 <?php
 
 /**
- * EditableFieldGroupTest contains test cases for test EditableFieldGroup class
+ * EditableFieldGroupTest contains test cases for test EditableFieldGroup class.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ *
  * @package editablefield
  */
 class EditableFieldGroupTest extends FunctionalTest
@@ -24,7 +25,7 @@ class EditableFieldGroupTest extends FunctionalTest
         $fields = $object->Fields();
         $this->assertGreaterThan(0, $fields->Count());
 
-        $cmsFields = $object->getCMSFields();
+        $cmsFields  = $object->getCMSFields();
         $gridFields = $cmsFields->dataFieldByName('Fields');
 
         $this->assertTrue($gridFields !== null);
@@ -35,7 +36,7 @@ class EditableFieldGroupTest extends FunctionalTest
 
     public function testRequiredFields()
     {
-        $object = $this->objFromFixture('EditableFieldGroup', 'group-empty');
+        $object    = $this->objFromFixture('EditableFieldGroup', 'group-empty');
         $validator = $object->getCMSValidator();
 
         $this->assertInstanceOf('RequiredFields', $validator);

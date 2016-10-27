@@ -1,16 +1,17 @@
 <?php
 
 /**
- * EditableFieldCheckbox is an object representing a checkbox created by CMS admin
+ * EditableFieldCheckbox is an object representing a checkbox created by CMS admin.
  *
  * @package editablefield
+ *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldCheckbox extends EditableField
 {
     private static $singular_name = 'Checkbox Field';
-    private static $plural_name = 'Checkboxes';
+    private static $plural_name   = 'Checkboxes';
 
     public function getFieldConfiguration()
     {

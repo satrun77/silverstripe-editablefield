@@ -1,9 +1,10 @@
 <?php
 
 /**
- * EditableFieldAdminTest contains test cases for testing the LeftAndMain subclass
+ * EditableFieldAdminTest contains test cases for testing the LeftAndMain subclass.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ *
  * @package editablefield
  */
 class EditableFieldAdminTest extends FunctionalTest
@@ -25,7 +26,7 @@ class EditableFieldAdminTest extends FunctionalTest
             'q'               => [
                 'Term' => 'email-field',
             ],
-            'action_doSearch' => 'Apply Filter'
+            'action_doSearch' => 'Apply Filter',
         ]);
         $admin = new EditableFieldAdmin();
         $admin->setRequest($request);
@@ -41,7 +42,7 @@ class EditableFieldAdminTest extends FunctionalTest
 
         $request = new SS_HTTPRequest('post', 'admin/editablefield/doAdd', null, [
             'Type'              => 'EditableFieldText',
-            'action_doAddField' => 'Add'
+            'action_doAddField' => 'Add',
         ]);
         $admin = new EditableFieldAdmin();
         $admin->setRequest($request);
@@ -55,9 +56,9 @@ class EditableFieldAdminTest extends FunctionalTest
     {
         $this->logInWithPermission('ADMIN');
 
-        $text = $this->objFromFixture('EditableFieldText', 'basic-text');
-        $email = $this->objFromFixture('EditableFieldEmail', 'email-field');
-        $textName = $text->Name . '_update';
+        $text       = $this->objFromFixture('EditableFieldText', 'basic-text');
+        $email      = $this->objFromFixture('EditableFieldEmail', 'email-field');
+        $textName   = $text->Name . '_update';
         $emailTitle = 'Email address 2';
 
         $response = $this->post('admin/editablefield/EditForm', [
@@ -67,14 +68,14 @@ class EditableFieldAdminTest extends FunctionalTest
                 ],
                 $email->ID => [
                     'Title' => $emailTitle,
-                ]
+                ],
             ],
-            'action_save' => 'Save'
+            'action_save' => 'Save',
         ]);
 
         $this->assertEquals('200', $response->getStatusCode());
 
-        $newText = $this->objFromFixture('EditableFieldText', 'basic-text');
+        $newText  = $this->objFromFixture('EditableFieldText', 'basic-text');
         $newEmail = $this->objFromFixture('EditableFieldEmail', 'email-field');
 
         $this->assertEquals($newText->Name, $textName);
@@ -92,7 +93,7 @@ class EditableFieldAdminTest extends FunctionalTest
                 $text->ID => [],
             ],
             'action_delete' => 1,
-            'delete_row'    => 1
+            'delete_row'    => 1,
         ]);
 
         $this->assertEquals('200', $response->getStatusCode());
@@ -103,12 +104,12 @@ class EditableFieldAdminTest extends FunctionalTest
     {
         $this->logInWithPermission('ADMIN');
 
-        $dropdown = $this->objFromFixture('EditableFieldDropdown', 'basic-dropdown');
+        $dropdown     = $this->objFromFixture('EditableFieldDropdown', 'basic-dropdown');
         $optionsCount = $dropdown->Options()->count();
 
         $this->post('admin/editablefield/EditForm', [
             'action_addoptionfield' => 1,
-            'Parent'                => $dropdown->ID
+            'Parent'                => $dropdown->ID,
         ]);
 
         $optionsCount2 = $dropdown->Options()->count() - 1;

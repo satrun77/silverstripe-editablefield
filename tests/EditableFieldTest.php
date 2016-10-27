@@ -1,70 +1,71 @@
 <?php
 
 /**
- * EditableFieldTest contains test cases for test EditableField classes
+ * EditableFieldTest contains test cases for test EditableField classes.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ *
  * @package editablefield
  */
 class EditableFieldTest extends FunctionalTest
 {
     protected static $fixture_file = 'EditableFieldTest.yml';
-    protected $fields = [
+    protected $fields              = [
         'radio-field'         => [
             'class' => 'EditableFieldRadio',
-            'field' => 'OptionsetField'
+            'field' => 'OptionsetField',
         ],
         'html-field'          => [
             'class' => 'EditableFieldLiteral',
-            'field' => 'LiteralField'
+            'field' => 'LiteralField',
         ],
         'numeric-field'       => [
             'class' => 'EditableFieldNumeric',
-            'field' => 'NumericField'
+            'field' => 'NumericField',
         ],
         'email-field'         => [
             'class' => 'EditableFieldEmail',
-            'field' => 'EmailField'
+            'field' => 'EmailField',
         ],
         'checkbox-1'          => [
             'class' => 'EditableFieldCheckbox',
-            'field' => 'CheckboxField'
+            'field' => 'CheckboxField',
         ],
         'department-dropdown' => [
             'class' => 'EditableFieldDropdown',
-            'field' => 'DropdownField'
+            'field' => 'DropdownField',
         ],
         'heading-field'       => [
             'class' => 'EditableFieldHeading',
-            'field' => 'HeaderField'
+            'field' => 'HeaderField',
         ],
         'dob-field'           => [
             'class' => 'EditableFieldDate',
-            'field' => 'DateField'
+            'field' => 'DateField',
         ],
         'country-field'       => [
             'class' => 'EditableFieldCountryDropdown',
-            'field' => 'CountryDropdownField'
+            'field' => 'CountryDropdownField',
         ],
         'member-field'        => [
             'class' => 'EditableFieldMemberList',
-            'field' => 'DropdownField'
+            'field' => 'DropdownField',
         ],
         'pagetype-field'      => [
             'class' => 'EditableFieldPageTypeList',
-            'field' => 'DropdownField'
+            'field' => 'DropdownField',
         ],
         'basic-text'          => [
             'class' => 'EditableFieldText',
-            'field' => 'TextField'
+            'field' => 'TextField',
         ],
         'text-area'           => [
             'class' => 'EditableFieldText',
-            'field' => 'TextareaField'
+            'field' => 'TextareaField',
         ],
         'checkbox-group'      => [
             'class' => 'EditableFieldCheckboxGroup',
-            'field' => 'CheckboxSetField'
+            'field' => 'CheckboxSetField',
         ],
     ];
 
@@ -79,7 +80,7 @@ class EditableFieldTest extends FunctionalTest
     public function testModifyingFieldSettings()
     {
         $content = 'html content 1...';
-        $field = $this->fields['html-field'];
+        $field   = $this->fields['html-field'];
 
         $htmlField = $this->objFromFixture($field['class'], 'html-field');
         $htmlField->setSetting('Content', $content);
@@ -90,7 +91,7 @@ class EditableFieldTest extends FunctionalTest
 
     public function testMultipleOptionDuplication()
     {
-        $field = $this->fields['department-dropdown'];
+        $field    = $this->fields['department-dropdown'];
         $dropdown = $this->objFromFixture($field['class'], 'department-dropdown');
 
         $clone = $dropdown->duplicate();

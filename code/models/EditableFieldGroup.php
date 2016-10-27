@@ -1,26 +1,28 @@
 <?php
 
 /**
- * EditableFieldGroup is a data object class for editable field group
+ * EditableFieldGroup is a data object class for editable field group.
  *
  * @package editablefield
+ *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ *
  * @method ManyManyList Fields()
  */
 class EditableFieldGroup extends DataObject
 {
     private static $db = [
-        "Title" => "Varchar(255)",
+        'Title' => 'Varchar(255)',
     ];
 
     private static $many_many = [
-        'Fields' => 'EditableField'
+        'Fields' => 'EditableField',
     ];
 
     private static $many_many_extraFields = [
         'Fields' => [
-            "Sort" => "Int",
-        ]
+            'Sort' => 'Int',
+        ],
     ];
 
     private static $default_sort = '"Title"';
@@ -30,7 +32,7 @@ class EditableFieldGroup extends DataObject
     private static $plural_name = 'Groups';
 
     /**
-     * Make sure the title is required field
+     * Make sure the title is required field.
      *
      * @return RequiredFields
      */
@@ -40,7 +42,7 @@ class EditableFieldGroup extends DataObject
     }
 
     /**
-     * Returns form fields for adding/editing the data object
+     * Returns form fields for adding/editing the data object.
      *
      * @return FieldList
      */

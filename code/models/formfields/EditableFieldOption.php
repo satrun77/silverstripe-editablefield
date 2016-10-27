@@ -1,12 +1,15 @@
 <?php
 
 /**
- * EditableFieldOption is is a base class for fields used in dropdown or checkbox groups
+ * EditableFieldOption is is a base class for fields used in dropdown or checkbox groups.
  *
  * @package editablefield
+ *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ *
  * @method EditableFieldMultipleOption Parent()
+ *
  * @property int    $ParentID
  * @property string $Title
  * @property string $Default
@@ -14,21 +17,21 @@
  */
 class EditableFieldOption extends DataObject
 {
-    private static $default_sort = "Sort";
-    private static $db = [
-        "Name"    => "Varchar(255)",
-        "Title"   => "Varchar(255)",
-        "Default" => "Boolean",
-        "Sort"    => "Int"
+    private static $default_sort = 'Sort';
+    private static $db           = [
+        'Name'    => 'Varchar(255)',
+        'Title'   => 'Varchar(255)',
+        'Default' => 'Boolean',
+        'Sort'    => 'Int',
     ];
     private static $has_one = [
-        "Parent" => "EditableFieldMultipleOption",
+        'Parent' => 'EditableFieldMultipleOption',
     ];
 
     /**
      * @param Member $member
      *
-     * @return boolean
+     * @return bool
      */
     public function canEdit($member = null)
     {
@@ -38,7 +41,7 @@ class EditableFieldOption extends DataObject
     /**
      * @param Member $member
      *
-     * @return boolean
+     * @return bool
      */
     public function canDelete($member = null)
     {
@@ -46,7 +49,7 @@ class EditableFieldOption extends DataObject
     }
 
     /**
-     * Template for the editing view of this option field
+     * Template for the editing view of this option field.
      */
     public function EditSegment()
     {
@@ -54,7 +57,7 @@ class EditableFieldOption extends DataObject
     }
 
     /**
-     * The Title Field for this object
+     * The Title Field for this object.
      *
      * @return FormField
      */
@@ -64,9 +67,9 @@ class EditableFieldOption extends DataObject
     }
 
     /**
-     * Name of this field in the form
+     * Name of this field in the form.
      *
-     * @return String
+     * @return string
      */
     public function FieldName()
     {
@@ -74,15 +77,15 @@ class EditableFieldOption extends DataObject
     }
 
     /**
-     * Populate this option from the form field
+     * Populate this option from the form field.
      *
      * @param array
      */
     public function populateFromPostData($data)
     {
-        $this->Title = (isset($data['Title'])) ? $data['Title'] : "";
-        $this->Default = (isset($data['Default'])) ? $data['Default'] : "";
-        $this->Sort = (isset($data['Sort'])) ? $data['Sort'] : 0;
+        $this->Title   = (isset($data['Title'])) ? $data['Title'] : '';
+        $this->Default = (isset($data['Default'])) ? $data['Default'] : '';
+        $this->Sort    = (isset($data['Sort'])) ? $data['Sort'] : 0;
         $this->write();
     }
 

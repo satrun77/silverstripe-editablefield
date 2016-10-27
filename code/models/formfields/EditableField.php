@@ -1,49 +1,52 @@
 <?php
 
 /**
- * EditableField is a base class for editable fields to extend
+ * EditableField is a base class for editable fields to extend.
  *
  * @package editablefield
+ *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ *
  * @property string $Title
  * @property string $Default
  * @property int    $Required
  * @property string $Name
  * @property string $CustomErrorMessage
  * @property string $CustomSettings
+ *
  * @method string ClassName()
  */
 class EditableField extends DataObject
 {
     /**
-     * A list of CSS classes that can be added
+     * A list of CSS classes that can be added.
      *
      * @var array
      */
     public static $allowed_css = [];
-    private static $db = [
-        "Name"               => "Varchar",
-        "Title"              => "Varchar(255)",
-        "Default"            => "Varchar",
-        "Required"           => "Boolean",
-        "CustomErrorMessage" => "Varchar(255)",
-        "CustomRules"        => "Text",
-        "CustomSettings"     => "Text",
-        "CustomParameter"    => "Varchar(200)"
+    private static $db         = [
+        'Name'               => 'Varchar',
+        'Title'              => 'Varchar(255)',
+        'Default'            => 'Varchar',
+        'Required'           => 'Boolean',
+        'CustomErrorMessage' => 'Varchar(255)',
+        'CustomRules'        => 'Text',
+        'CustomSettings'     => 'Text',
+        'CustomParameter'    => 'Varchar(200)',
     ];
     private static $singular_name = 'Editable Field';
-    private static $plural_name = 'Editable Fields';
+    private static $plural_name   = 'Editable Fields';
 
     /**
-     * Instance of FormField
+     * Instance of FormField.
      *
      * @var FormField
      */
     protected $field;
 
     /**
-     * Template to render the field into
+     * Template to render the field into.
      *
      * @return HTMLText
      */
@@ -56,7 +59,7 @@ class EditableField extends DataObject
      * To prevent having tables for each fields minor settings we store it as
      * a serialized array in the database.
      *
-     * @return Array Return all the Settings
+     * @return array Return all the Settings
      */
     public function getSettings()
     {
@@ -65,7 +68,7 @@ class EditableField extends DataObject
 
     /**
      * Set the custom settings for this field as we store the minor details in
-     * a serialized array in the database
+     * a serialized array in the database.
      *
      * @param array $settings the custom settings
      */
@@ -76,21 +79,21 @@ class EditableField extends DataObject
 
     /**
      * Set a given field setting. Appends the option to the settings or overrides
-     * the existing value
+     * the existing value.
      *
      * @param string $key
      * @param string $value
      */
     public function setSetting($key, $value)
     {
-        $settings = $this->getSettings();
+        $settings       = $this->getSettings();
         $settings[$key] = $value;
 
         $this->setSettings($settings);
     }
 
     /**
-     * Set the allowed css classes for the extraClass custom setting
+     * Set the allowed css classes for the extraClass custom setting.
      *
      * @param array $allowed The permissible CSS classes to add
      */
@@ -105,11 +108,11 @@ class EditableField extends DataObject
 
     /**
      * Return just one custom setting or empty string if it does
-     * not exist
+     * not exist.
      *
      * @param string $setting
      *
-     * @return String
+     * @return string
      */
     public function getSetting($setting)
     {
@@ -135,7 +138,7 @@ class EditableField extends DataObject
 
     /**
      * Return whether or not this field has addable options
-     * such as a dropdown field or radio set
+     * such as a dropdown field or radio set.
      *
      * @return bool
      */
@@ -145,7 +148,7 @@ class EditableField extends DataObject
     }
 
     /**
-     * Return whether or not this field needs to show the extra options dropdown list
+     * Return whether or not this field needs to show the extra options dropdown list.
      *
      * @return bool
      */
@@ -155,7 +158,7 @@ class EditableField extends DataObject
     }
 
     /**
-     * Title field of the field in the backend of the page
+     * Title field of the field in the backend of the page.
      *
      * @return TextField
      */
@@ -165,7 +168,7 @@ class EditableField extends DataObject
     }
 
     /**
-     * Name field of the field in the backend of the page
+     * Name field of the field in the backend of the page.
      *
      * @return TextField
      */
@@ -178,11 +181,12 @@ class EditableField extends DataObject
     }
 
     /**
-     * Generate TextField object
+     * Generate TextField object.
      *
      * @param string $name
      * @param string $title
-     * @return TextField 
+     *
+     * @return TextField
      */
     protected function getTextField($name, $title)
     {
@@ -197,7 +201,7 @@ class EditableField extends DataObject
     }
 
     /**
-     * Returns the Title for rendering in the front-end (with XML values escaped)
+     * Returns the Title for rendering in the front-end (with XML values escaped).
      *
      * @return string
      */
@@ -208,23 +212,23 @@ class EditableField extends DataObject
 
     /**
      * Return the base name for this form field in the
-     * form builder. Optionally returns the name with the given field
+     * form builder. Optionally returns the name with the given field.
      *
-     * @param string|boolean $field
+     * @param string|bool $field
      *
-     * @return String
+     * @return string
      */
     public function getFieldName($field = false)
     {
-        return ($field) ? "Fields[" . $this->ID . "][" . $field . "]" : "Fields[" . $this->ID . "]";
+        return ($field) ? 'Fields[' . $this->ID . '][' . $field . ']' : 'Fields[' . $this->ID . ']';
     }
 
     /**
-     * Generate a name for the Setting field
+     * Generate a name for the Setting field.
      *
      * @param string $field
      *
-     * @return String
+     * @return string
      */
     public function getSettingName($field)
     {
@@ -247,13 +251,13 @@ class EditableField extends DataObject
      */
     public function populateFromPostData($data)
     {
-        $this->Title = (isset($data['Title'])) ? $data['Title'] : "";
-        $this->Default = (isset($data['Default'])) ? $data['Default'] : "";
+        $this->Title    = (isset($data['Title'])) ? $data['Title'] : '';
+        $this->Default  = (isset($data['Default'])) ? $data['Default'] : '';
         $this->Required = !empty($data['Required']) ? 1 : 0;
-        $this->Name = (isset($data['Name'])) ? preg_replace("/[^a-zA-Z0-9_]+/", "",
+        $this->Name     = (isset($data['Name'])) ? preg_replace('/[^a-zA-Z0-9_]+/', '',
                                                             $data['Name']) : $this->class . $this->ID;
-        $this->CustomErrorMessage = (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : "";
-        $this->CustomSettings = "";
+        $this->CustomErrorMessage = (isset($data['CustomErrorMessage'])) ? $data['CustomErrorMessage'] : '';
+        $this->CustomSettings     = '';
 
         $exists = DataObject::get($this->class)->filter('Name', $this->Name)->exclude('ID', $this->ID);
         if ($exists->count()) {
@@ -272,7 +276,7 @@ class EditableField extends DataObject
 
     /**
      * Implement custom field Configuration on this field. Includes such things as
-     * settings and options of a given editable form field
+     * settings and options of a given editable form field.
      *
      * @return FieldList
      */
@@ -316,7 +320,7 @@ class EditableField extends DataObject
 
     /**
      * Append custom validation fields to the default 'Validation'
-     * section in the editable options view
+     * section in the editable options view.
      *
      * @return FieldList|false
      */
@@ -335,7 +339,7 @@ class EditableField extends DataObject
     }
 
     /**
-     * Return a FormField
+     * Return a FormField.
      *
      * @return FormField
      */
@@ -349,7 +353,7 @@ class EditableField extends DataObject
     }
 
     /**
-     * Initiate a form field
+     * Initiate a form field.
      *
      * @return FormField
      */
@@ -360,13 +364,13 @@ class EditableField extends DataObject
 
     /**
      * Return the error message for this field. Either uses the custom
-     * one (if provided) or the default SilverStripe message
+     * one (if provided) or the default SilverStripe message.
      *
      * @return Varchar
      */
     public function getErrorMessage()
     {
-        $title = strip_tags("'" . ($this->Title ? $this->Title : $this->Name) . "'");
+        $title    = strip_tags("'" . ($this->Title ? $this->Title : $this->Name) . "'");
         $standard = _t('Form.FIELDISREQUIRED', '{name} is required', ['name' => $title]);
 
         // only use CustomErrorMessage if it has a non empty value

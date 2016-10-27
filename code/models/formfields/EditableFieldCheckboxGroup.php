@@ -1,17 +1,19 @@
 <?php
 
 /**
- * EditableFieldCheckboxGroup is an object representing a set of selectable radio buttons created by CMS admin
+ * EditableFieldCheckboxGroup is an object representing a set of selectable radio buttons created by CMS admin.
  *
  * @package editablefield
+ *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ *
  * @method HasManyList Options()
  */
 class EditableFieldCheckboxGroup extends EditableFieldMultipleOption
 {
-    private static $singular_name = "Checkbox Group";
-    private static $plural_name = "Checkbox Groups";
+    private static $singular_name = 'Checkbox Group';
+    private static $plural_name   = 'Checkbox Groups';
 
     protected function initFormField()
     {

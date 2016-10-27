@@ -1,16 +1,17 @@
 <?php
 
 /**
- * EditableFieldHeading is an object representing generic heading created by CMS admin
+ * EditableFieldHeading is an object representing generic heading created by CMS admin.
  *
  * @package editablefield
+ *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class EditableFieldHeading extends EditableField
 {
     private static $singular_name = 'Heading';
-    private static $plural_name = 'Headings';
+    private static $plural_name   = 'Headings';
 
     public function getFieldConfiguration()
     {
@@ -20,7 +21,7 @@ class EditableFieldHeading extends EditableField
             '3' => '3',
             '4' => '4',
             '5' => '5',
-            '6' => '6'
+            '6' => '6',
         ];
 
         $level = ($this->getSetting('Level')) ? $this->getSetting('Level') : 3;
@@ -29,7 +30,7 @@ class EditableFieldHeading extends EditableField
         $options = parent::getFieldConfiguration();
 
         $options->push(
-            new DropdownField($this->getSettingName("Level"), $label, $levels, $level)
+            new DropdownField($this->getSettingName('Level'), $label, $levels, $level)
         );
 
         return $options;

@@ -1,25 +1,29 @@
 <?php
 
 /**
- * EditableFieldMultipleOption is a base class for multiple option fields to extend
+ * EditableFieldMultipleOption is a base class for multiple option fields to extend.
  *
  * @see     EditableFieldCheckboxGroup, EditableFieldDropdown
+ *
  * @package editablefield
+ *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
+ *
  * @method  HasManyList Options()
+ *
  * @property string $Name
  * @property string $Title
  */
 class EditableFieldMultipleOption extends EditableField
 {
     private static $has_many = [
-        "Options" => "EditableFieldOption"
+        'Options' => 'EditableFieldOption',
     ];
 
     /**
      * Deletes all the options attached to this field before deleting the
-     * field. Keeps stray options from floating around
+     * field. Keeps stray options from floating around.
      *
      * @return void
      */
@@ -38,7 +42,7 @@ class EditableFieldMultipleOption extends EditableField
 
     /**
      * Duplicate a pages content. We need to make sure all the fields attached
-     * to that page go with it
+     * to that page go with it.
      *
      * @return DataObject
      */
@@ -48,7 +52,7 @@ class EditableFieldMultipleOption extends EditableField
 
         if ($this->Options()) {
             foreach ($this->Options() as $field) {
-                $newField = $field->duplicate();
+                $newField           = $field->duplicate();
                 $newField->ParentID = $clonedNode->ID;
                 $newField->write();
             }
@@ -59,7 +63,7 @@ class EditableFieldMultipleOption extends EditableField
 
     /**
      * On before saving this object we need to go through and keep an eye on
-     * all our option fields that are related to this field in the form
+     * all our option fields that are related to this field in the form.
      *
      * @param array
      */
@@ -72,7 +76,7 @@ class EditableFieldMultipleOption extends EditableField
 
         // go over all the current options and check if ID and Title still exists
         foreach ($fieldSet as $option) {
-            if (isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != "field-node-deleted") {
+            if (isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != 'field-node-deleted') {
                 $option->populateFromPostData($data[$option->ID]);
             } else {
                 $option->delete();
@@ -82,7 +86,7 @@ class EditableFieldMultipleOption extends EditableField
 
     /**
      * Return whether or not this field has addable options such as a
-     * {@link EditableDropdownField} or {@link EditableRadioField}
+     * {@link EditableDropdownField} or {@link EditableRadioField}.
      *
      * @return bool
      */
@@ -92,7 +96,7 @@ class EditableFieldMultipleOption extends EditableField
     }
 
     /**
-     * Return the form field for this object in the front end form view
+     * Return the form field for this object in the front end form view.
      *
      * @return FormField
      */
