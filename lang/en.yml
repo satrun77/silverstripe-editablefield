@@ -1,26 +1,26 @@
 en:
-  EditableFieldCheckbox:
+  Moo_EditableFieldCheckbox:
     PLURALNAME: Checkboxes
     SINGULARNAME: 'Checkbox Field'
-  EditableFieldCheckboxGroup:
+  Moo_EditableFieldCheckboxGroup:
     PLURALNAME: 'Checkbox Groups'
     SINGULARNAME: 'Checkbox Group'
-  EditableFieldCountryDropdown:
+  Moo_EditableFieldCountryDropdown:
     PLURALNAME: 'Country Dropdowns'
     SINGULARNAME: 'Country Dropdown Field'
-  EditableFieldDate:
+  Moo_EditableFieldDate:
     PLURALNAME: 'Date Fields'
     SINGULARNAME: 'Date Field'
-  EditableFieldDropdown:
+  Moo_EditableFieldDropdown:
     PLURALNAME: Dropdowns
     SINGULARNAME: 'Dropdown Field'
-  EditableFieldEmail:
+  Moo_EditableFieldEmail:
     PLURALNAME: 'Email Fields'
     SINGULARNAME: 'Email Field'
-  EditableFieldFile:
+  Moo_EditableFieldFile:
     PLURALNAME: 'File Upload Fields'
     SINGULARNAME: 'File Upload Field'
-  EditableField:
+  Moo_EditableField:
     ADD: Add
     ADDLabel: 'Add option'
     BLANK: Blank
@@ -43,39 +43,39 @@ en:
     SINGULARNAME: 'Editable Field'
     VALIDATION: Validation
     YES: Yes
-  EditableFieldHeading:
+  Moo_EditableFieldHeading:
     LEVEL: 'Select Heading Level'
     PLURALNAME: Headings
     SINGULARNAME: Heading
-  EditableFieldLiteral:
+  Moo_EditableFieldLiteral:
     HIDEFROMREPORT: 'Hide from reports?'
     PLURALNAME: 'HTML Blocks'
     SINGULARNAME: 'HTML Block'
-  EditableFieldMemberList:
+  Moo_EditableFieldMemberList:
     PLURALNAME: 'Member List Fields'
     SINGULARNAME: 'Member List Field'
-  EditableFieldMultipleOption:
+  Moo_EditableFieldMultipleOption:
     PLURALNAME: 'Editable Multiple Option Fields'
     SINGULARNAME: 'Editable Multiple Option Field'
-  EditableFieldNumeric:
+  Moo_EditableFieldNumeric:
     PLURALNAME: 'Numeric Fields'
     SINGULARNAME: 'Numeric Field'
-  EditableFieldOption:
+  Moo_EditableFieldOption:
     DELETE: 'Remove this option'
     DRAG: 'Drag to rearrange order of options'
     LOCKED: 'These fields cannot be modified'
     PLURALNAME: 'Editable Options'
     SINGULARNAME: 'Editable Option'
-  EditableFieldRadio:
+  Moo_EditableFieldRadio:
     PLURALNAME: 'Radio Fields'
     SINGULARNAME: 'Radio Field'
-  EditableFieldText:
+  Moo_EditableFieldText:
     NUMBERROWS: 'Number of rows'
     PLURALNAME: 'Text Fields'
     SINGULARNAME: 'Text Field'
     TEXTLENGTH: 'Text length'
-  EditableFieldPageTypeList:
+  Moo_EditableFieldPageTypeList:
     PLURALNAME: 'Page Type List Fields'
     SINGULARNAME: 'Page Type List Field'
-  EditableFieldAdmin:
+  Moo_EditableFieldAdmin:
     SELECTAFIELD: 'Select a Field'

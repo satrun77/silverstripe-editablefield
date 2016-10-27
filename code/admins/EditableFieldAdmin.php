@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EditableFieldAdmin is an admin class for managing the editable fields in the system.
+ * Moo_EditableFieldAdmin is an admin class for managing the editable fields in the system.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
@@ -10,11 +10,11 @@
  * @property int    $ID
  * @property string $Name
  */
-class EditableFieldAdmin extends LeftAndMain
+class Moo_EditableFieldAdmin extends LeftAndMain
 {
     private static $url_segment     = 'editablefield';
     private static $menu_title      = 'Editable fields';
-    private static $tree_class      = 'EditableField';
+    private static $tree_class      = 'Moo_EditableField';
     private static $allowed_actions = [
         'SearchForm',
         'filter',
@@ -39,8 +39,8 @@ class EditableFieldAdmin extends LeftAndMain
     public function init()
     {
         parent::init();
-        Requirements::css('editablefield/css/EditableField.css');
-        Requirements::javascript('editablefield/javascript/EditableField.js');
+        Requirements::css('editablefield/css/Moo_EditableField.css');
+        Requirements::javascript('editablefield/javascript/Moo_EditableField.js');
     }
 
     /**
@@ -60,7 +60,7 @@ class EditableFieldAdmin extends LeftAndMain
         );
 
         // Form tabs
-        $fieldsTab = new Tab('Fields', _t('EditableFieldAdmin.Fields', 'Fields'));
+        $fieldsTab = new Tab('Fields', _t('Moo_EditableFieldAdmin.Fields', 'Fields'));
         $groupsTab = new Tab('Groups', singleton('Group')->i18n_plural_name());
 
         // Form tab container
@@ -80,19 +80,19 @@ class EditableFieldAdmin extends LeftAndMain
 
         // Add field to first tab
         $fields->addFieldToTab('Root.Fields',
-                               new EditableFieldEditor('Fields', 'Fields', '')
+                               new Moo_EditableFieldEditor('Fields', 'Fields', '')
         );
 
         // Add field to second tab
         $groupsConfig = GridFieldConfig_RecordEditor::create();
         $groupsField  = GridField::create(
-            'EditableFieldGroup',
+            'Moo_EditableFieldGroup',
             singleton('Group')->i18n_plural_name(),
-            EditableFieldGroup::get(),
+            Moo_EditableFieldGroup::get(),
             $groupsConfig
         );
         $component = $groupsConfig->getComponentByType('GridFieldAddNewButton');
-        $component->setButtonName(_t('EditableFieldAdmin.AddGroup', 'Add Group'));
+        $component->setButtonName(_t('Moo_EditableFieldAdmin.AddGroup', 'Add Group'));
         $fields->addFieldToTab('Root.Groups', $groupsField);
 
         // The edit form
@@ -136,17 +136,17 @@ class EditableFieldAdmin extends LeftAndMain
             return Security::permissionFailure();
         }
 
-        // EditableField type is required
+        // Moo_EditableField type is required
         $className = $this->request->postVar('Type');
         if (!$className) {
-            throw new ValidationException(_t('EditableFieldAdmin.MISSINGFIELDTYPE',
+            throw new ValidationException(_t('Moo_EditableFieldAdmin.MISSINGFIELDTYPE',
                                              'Please select a field type to created'));
         }
 
-        // Class name must be a subclass of EditableField
+        // Class name must be a subclass of Moo_EditableField
         // Then instantiate the class, create new data, and render display row
-        if (is_subclass_of($className, 'EditableField')) {
-            /** @var EditableField $field */
+        if (is_subclass_of($className, 'Moo_EditableField')) {
+            /** @var Moo_EditableField $field */
             $field = Object::create($className);
 
             $newID = $this->request->postVar('NewID');
@@ -159,7 +159,7 @@ class EditableFieldAdmin extends LeftAndMain
             return $field->EditSegment();
         }
 
-        throw new ValidationException(_t('EditableFieldAdmin.INVALIDFIELDTYPE', 'Invalid field type selected'));
+        throw new ValidationException(_t('Moo_EditableFieldAdmin.INVALIDFIELDTYPE', 'Invalid field type selected'));
     }
 
     /**
@@ -196,7 +196,7 @@ class EditableFieldAdmin extends LeftAndMain
                 }
 
                 // Get it from the db
-                $editable = DataObject::get_by_id('EditableField', $newEditableID);
+                $editable = DataObject::get_by_id('Moo_EditableField', $newEditableID);
 
                 // If it exists in the db update it
                 if ($editable) {
@@ -233,11 +233,11 @@ class EditableFieldAdmin extends LeftAndMain
         $fieldID = (int) key($record['Fields']);
 
         // Get it from the db
-        $editable = DataObject::get_by_id('EditableField', $fieldID);
+        $editable = DataObject::get_by_id('Moo_EditableField', $fieldID);
 
         // If it exists in the db delete it
         if (!$editable) {
-            return $this->httpError(404, _t('EditableFieldAdmin.INVALIDFIELDTYPE', 'Invalid field type selected'));
+            return $this->httpError(404, _t('Moo_EditableFieldAdmin.INVALIDFIELDTYPE', 'Invalid field type selected'));
         }
         $editable->delete();
 
@@ -275,14 +275,14 @@ class EditableFieldAdmin extends LeftAndMain
         $parent = (isset($record['Parent'])) ? $record['Parent'] : false;
 
         if ($parent) {
-            $parentObj   = EditableField::get()->byID($parent);
-            $optionClass = ($parentObj && $parentObj->exists()) ? $parentObj->getRelationClass('Options') : 'EditableFieldOption';
+            $parentObj   = Moo_EditableField::get()->byID($parent);
+            $optionClass = ($parentObj && $parentObj->exists()) ? $parentObj->getRelationClass('Options') : 'Moo_EditableFieldOption';
 
             // Work out the sort by getting the sort of the last field in the form +1
             $sqlQuery = new SQLQuery();
             $sqlQuery = $sqlQuery
                 ->setSelect('MAX("Sort")')
-                ->setFrom('"EditableFieldOption"')
+                ->setFrom('"Moo_EditableFieldOption"')
                 ->setWhere('"ParentID" = ' . (int) $parent);
 
             $sort = $sqlQuery->execute()->value() + 1;
@@ -356,7 +356,7 @@ class EditableFieldAdmin extends LeftAndMain
     {
         // List of creatable form fields
         $typeDropdown = new DropdownField(
-            'Type', _t('EditableFieldAdmin.SELECTAFIELD', 'Select a Field'), $this->getCreatableFields()
+            'Type', _t('Moo_EditableFieldAdmin.SELECTAFIELD', 'Select a Field'), $this->getCreatableFields()
         );
         $typeDropdown->setEmptyString(' ');
 
@@ -367,7 +367,7 @@ class EditableFieldAdmin extends LeftAndMain
 
         // Form add button
         $actions = new FieldList(
-            FormAction::create('doAddField', _t('EditableField.ADD', 'Add'))
+            FormAction::create('doAddField', _t('Moo_EditableField.ADD', 'Add'))
                 ->addExtraClass('ss-ui-action-constructive')
                 ->setAttribute('data-icon', 'add')
                 ->setUseButtonTag(true)
@@ -396,7 +396,7 @@ class EditableFieldAdmin extends LeftAndMain
      */
     public function getCreatableFields()
     {
-        $fields = ClassInfo::subclassesFor('EditableField');
+        $fields = ClassInfo::subclassesFor('Moo_EditableField');
         $output = [];
 
         if (!empty($fields)) {
@@ -405,7 +405,7 @@ class EditableFieldAdmin extends LeftAndMain
 
             foreach ($fields as $field => $title) {
                 // Skip an abstract class
-                if ($field == 'EditableFieldMultipleOption') {
+                if ($field == 'Moo_EditableFieldMultipleOption') {
                     continue;
                 }
 
@@ -425,10 +425,10 @@ class EditableFieldAdmin extends LeftAndMain
      *
      * @return DataList
      */
-    public function EditableFieldEditor()
+    public function Moo_EditableFieldEditor()
     {
         if (null === $this->formFields) {
-            $this->formFields = DataObject::get('EditableField')->limit(50)->sort('Title', 'ASC');
+            $this->formFields = DataObject::get('Moo_EditableField')->limit(50)->sort('Title', 'ASC');
         }
 
         $query = $this->request->requestVar('q');
@@ -447,7 +447,7 @@ class EditableFieldAdmin extends LeftAndMain
      */
     public function canView($member = null)
     {
-        return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+        return (boolean) Permission::check('CMS_ACCESS_Moo_EditableFieldAdmin', 'any', $member);
     }
 
     /**
@@ -459,7 +459,7 @@ class EditableFieldAdmin extends LeftAndMain
      */
     public function canEdit($member = null)
     {
-        return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+        return (boolean) Permission::check('CMS_ACCESS_Moo_EditableFieldAdmin', 'any', $member);
     }
 
     /**
@@ -471,7 +471,7 @@ class EditableFieldAdmin extends LeftAndMain
      */
     public function canDelete($member = null)
     {
-        return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+        return (boolean) Permission::check('CMS_ACCESS_Moo_EditableFieldAdmin', 'any', $member);
     }
 
     /**
@@ -483,6 +483,6 @@ class EditableFieldAdmin extends LeftAndMain
      */
     public function canCreate($member = null)
     {
-        return (boolean) Permission::check('CMS_ACCESS_EditableFieldAdmin', 'any', $member);
+        return (boolean) Permission::check('CMS_ACCESS_Moo_EditableFieldAdmin', 'any', $member);
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * EditableFieldDate is an object representing date field created by CMS admin.
+ * Moo_EditableFieldDate is an object representing date field created by CMS admin.
  *
  * @package editablefield
  *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
-class EditableFieldDate extends EditableField
+class Moo_EditableFieldDate extends Moo_EditableField
 {
     private static $singular_name = 'Date Field';
     private static $plural_name   = 'Date Fields';
@@ -16,7 +16,7 @@ class EditableFieldDate extends EditableField
     public function getFieldConfiguration()
     {
         $default = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
-        $label   = _t('EditableField.DEFAULTTOTODAY', 'Default to Today?');
+        $label   = _t('Moo_EditableField.DEFAULTTOTODAY', 'Default to Today?');
 
         return new FieldList(
             new CheckboxField($this->getSettingName('DefaultToToday'), $label, $default)

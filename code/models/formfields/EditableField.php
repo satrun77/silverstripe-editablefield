@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EditableField is a base class for editable fields to extend.
+ * Moo_EditableField is a base class for editable fields to extend.
  *
  * @package editablefield
  *
@@ -17,7 +17,7 @@
  *
  * @method string ClassName()
  */
-class EditableField extends DataObject
+class Moo_EditableField extends DataObject
 {
     /**
      * A list of CSS classes that can be added.
@@ -52,7 +52,7 @@ class EditableField extends DataObject
      */
     public function EditSegment()
     {
-        return $this->renderWith('EditableField');
+        return $this->renderWith('Moo_EditableField');
     }
 
     /**
@@ -190,7 +190,7 @@ class EditableField extends DataObject
      */
     protected function getTextField($name, $title)
     {
-        $label = _t('EditableField.FIELDNAME', $title);
+        $label = _t('Moo_EditableField.FIELDNAME', $title);
 
         $field = new TextField($name, $label, $this->getField($name));
         $field->setName($this->getFieldName($name));
@@ -261,7 +261,7 @@ class EditableField extends DataObject
 
         $exists = DataObject::get($this->class)->filter('Name', $this->Name)->exclude('ID', $this->ID);
         if ($exists->count()) {
-            throw new ValidationException(_t('EditableField.UNIQUENAME', 'Field name "{name}" must be unique', '',
+            throw new ValidationException(_t('Moo_EditableField.UNIQUENAME', 'Field name "{name}" must be unique', '',
                                              ['name' => $this->Name]));
         }
 
@@ -295,18 +295,18 @@ class EditableField extends DataObject
             }
 
             $ec = new DropdownField(
-                $this->getSettingName('ExtraClass'), _t('EditableField.EXTRACLASSA', 'Extra Styling/Layout'), $cssList,
+                $this->getSettingName('ExtraClass'), _t('Moo_EditableField.EXTRACLASSA', 'Extra Styling/Layout'), $cssList,
                 $extraClass
             );
         } else {
             $ec = new TextField(
                 $this->getSettingName('ExtraClass'),
-                _t('EditableField.EXTRACLASSB', 'Extra css Class - separate multiples with a space'), $extraClass
+                _t('Moo_EditableField.EXTRACLASSB', 'Extra css Class - separate multiples with a space'), $extraClass
             );
         }
 
         $right = new TextField(
-            $this->getSettingName('RightTitle'), _t('EditableField.RIGHTTITLE', 'Right Title'),
+            $this->getSettingName('RightTitle'), _t('Moo_EditableField.RIGHTTITLE', 'Right Title'),
             $this->getSetting('RightTitle')
         );
 
@@ -327,9 +327,9 @@ class EditableField extends DataObject
     public function getFieldValidationOptions()
     {
         $fields = new FieldList(
-            new CheckboxField($this->getFieldName('Required'), _t('EditableField.REQUIRED', 'Is this field Required?'),
+            new CheckboxField($this->getFieldName('Required'), _t('Moo_EditableField.REQUIRED', 'Is this field Required?'),
                               $this->Required), new TextField($this->getFieldName('CustomErrorMessage'),
-                                                              _t('EditableField.CUSTOMERROR', 'Custom Error Message'),
+                                                              _t('Moo_EditableField.CUSTOMERROR', 'Custom Error Message'),
                                                               $this->CustomErrorMessage)
         );
 

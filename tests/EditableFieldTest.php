@@ -1,70 +1,70 @@
 <?php
 
 /**
- * EditableFieldTest contains test cases for test EditableField classes.
+ * Moo_EditableFieldTest contains test cases for test Moo_EditableField classes.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
  * @package editablefield
  */
-class EditableFieldTest extends FunctionalTest
+class Moo_EditableFieldTest extends FunctionalTest
 {
-    protected static $fixture_file = 'EditableFieldTest.yml';
+    protected static $fixture_file = 'Moo_EditableFieldTest.yml';
     protected $fields              = [
         'radio-field'         => [
-            'class' => 'EditableFieldRadio',
+            'class' => 'Moo_EditableFieldRadio',
             'field' => 'OptionsetField',
         ],
         'html-field'          => [
-            'class' => 'EditableFieldLiteral',
+            'class' => 'Moo_EditableFieldLiteral',
             'field' => 'LiteralField',
         ],
         'numeric-field'       => [
-            'class' => 'EditableFieldNumeric',
+            'class' => 'Moo_EditableFieldNumeric',
             'field' => 'NumericField',
         ],
         'email-field'         => [
-            'class' => 'EditableFieldEmail',
+            'class' => 'Moo_EditableFieldEmail',
             'field' => 'EmailField',
         ],
         'checkbox-1'          => [
-            'class' => 'EditableFieldCheckbox',
+            'class' => 'Moo_EditableFieldCheckbox',
             'field' => 'CheckboxField',
         ],
         'department-dropdown' => [
-            'class' => 'EditableFieldDropdown',
+            'class' => 'Moo_EditableFieldDropdown',
             'field' => 'DropdownField',
         ],
         'heading-field'       => [
-            'class' => 'EditableFieldHeading',
+            'class' => 'Moo_EditableFieldHeading',
             'field' => 'HeaderField',
         ],
         'dob-field'           => [
-            'class' => 'EditableFieldDate',
+            'class' => 'Moo_EditableFieldDate',
             'field' => 'DateField',
         ],
         'country-field'       => [
-            'class' => 'EditableFieldCountryDropdown',
+            'class' => 'Moo_EditableFieldCountryDropdown',
             'field' => 'CountryDropdownField',
         ],
         'member-field'        => [
-            'class' => 'EditableFieldMemberList',
+            'class' => 'Moo_EditableFieldMemberList',
             'field' => 'DropdownField',
         ],
         'pagetype-field'      => [
-            'class' => 'EditableFieldPageTypeList',
+            'class' => 'Moo_EditableFieldPageTypeList',
             'field' => 'DropdownField',
         ],
         'basic-text'          => [
-            'class' => 'EditableFieldText',
+            'class' => 'Moo_EditableFieldText',
             'field' => 'TextField',
         ],
         'text-area'           => [
-            'class' => 'EditableFieldText',
+            'class' => 'Moo_EditableFieldText',
             'field' => 'TextareaField',
         ],
         'checkbox-group'      => [
-            'class' => 'EditableFieldCheckboxGroup',
+            'class' => 'Moo_EditableFieldCheckboxGroup',
             'field' => 'CheckboxSetField',
         ],
     ];

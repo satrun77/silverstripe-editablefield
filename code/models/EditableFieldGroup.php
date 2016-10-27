@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EditableFieldGroup is a data object class for editable field group.
+ * Moo_EditableFieldGroup is a data object class for editable field group.
  *
  * @package editablefield
  *
@@ -9,14 +9,14 @@
  *
  * @method ManyManyList Fields()
  */
-class EditableFieldGroup extends DataObject
+class Moo_EditableFieldGroup extends DataObject
 {
     private static $db = [
         'Title' => 'Varchar(255)',
     ];
 
     private static $many_many = [
-        'Fields' => 'EditableField',
+        'Fields' => 'Moo_EditableField',
     ];
 
     private static $many_many_extraFields = [

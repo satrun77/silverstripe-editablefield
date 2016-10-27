@@ -1,14 +1,14 @@
 <?php
 
 /**
- * EditableFieldText is an object representing text field created by CMS admin.
+ * Moo_EditableFieldText is an object representing text field created by CMS admin.
  *
  * @package editablefield
  *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
-class EditableFieldText extends EditableField
+class Moo_EditableFieldText extends Moo_EditableField
 {
     private static $singular_name = 'Text Field';
     private static $plural_name   = 'Text Fields';
@@ -24,11 +24,11 @@ class EditableFieldText extends EditableField
 
         $extraFields = new FieldList(
             new FieldGroup(
-                _t('EditableFieldText.TEXTLENGTH', 'Text length'),
+                _t('Moo_EditableFieldText.TEXTLENGTH', 'Text length'),
                 new NumericField($this->getSettingName('MinLength'), '', $min),
                 new NumericField($this->getSettingName('MaxLength'), ' - ', $max)
             ),
-            new NumericField($this->getSettingName('Rows'), _t('EditableFieldText.NUMBERROWS', 'Number of rows'), $rows)
+            new NumericField($this->getSettingName('Rows'), _t('Moo_EditableFieldText.NUMBERROWS', 'Number of rows'), $rows)
         );
 
         $fields->merge($extraFields);

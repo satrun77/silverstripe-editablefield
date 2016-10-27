@@ -1,13 +1,13 @@
 <?php
 
 /**
- * EditableFieldPageTypeList is an object representing page types dropdown field created by CMS admin.
+ * Moo_EditableFieldPageTypeList is an object representing page types dropdown field created by CMS admin.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
  * @package editablefield
  */
-class EditableFieldPageTypeList extends EditableField
+class Moo_EditableFieldPageTypeList extends Moo_EditableField
 {
     private static $singular_name = 'Page Type List Field';
     private static $plural_name   = 'Page Type List Fields';
@@ -27,7 +27,7 @@ class EditableFieldPageTypeList extends EditableField
 
         $fields = new FieldList(
             new DropdownField("Fields[$this->ID][CustomSettings][PageTypeName]",
-                              _t('EditableFieldPageTypeList.PAGETYPENAME', 'Page Type Name'), $types, $pageType)
+                              _t('Moo_EditableFieldPageTypeList.PAGETYPENAME', 'Page Type Name'), $types, $pageType)
         );
 
         return $fields;

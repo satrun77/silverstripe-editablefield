@@ -1,4 +1,4 @@
-EditableField:
+Moo_EditableField:
     text-field:
         Name: basictextname
         Title: Basic Text Field
@@ -11,10 +11,10 @@ EditableField:
         Name: numericfield
         Title: Numeric
 
-EditableFieldGroup:
+Moo_EditableFieldGroup:
   group-1:
     Title: Group One
-    Fields: =>EditableField.text-field, =>EditableField.email-field, =>EditableField.numeric-field
+    Fields: =>Moo_EditableField.text-field, =>Moo_EditableField.email-field, =>Moo_EditableField.numeric-field
 
   group-empty:
     Title: Group Empty

@@ -1,21 +1,21 @@
 <?php
 
 /**
- * EditableFieldOption is is a base class for fields used in dropdown or checkbox groups.
+ * Moo_EditableFieldOption is is a base class for fields used in dropdown or checkbox groups.
  *
  * @package editablefield
  *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
- * @method EditableFieldMultipleOption Parent()
+ * @method Moo_EditableFieldMultipleOption Parent()
  *
  * @property int    $ParentID
  * @property string $Title
  * @property string $Default
  * @property int    $Sort
  */
-class EditableFieldOption extends DataObject
+class Moo_EditableFieldOption extends DataObject
 {
     private static $default_sort = 'Sort';
     private static $db           = [
@@ -25,7 +25,7 @@ class EditableFieldOption extends DataObject
         'Sort'    => 'Int',
     ];
     private static $has_one = [
-        'Parent' => 'EditableFieldMultipleOption',
+        'Parent' => 'Moo_EditableFieldMultipleOption',
     ];
 
     /**
@@ -53,7 +53,7 @@ class EditableFieldOption extends DataObject
      */
     public function EditSegment()
     {
-        return $this->renderWith('EditableFieldOption');
+        return $this->renderWith('Moo_EditableFieldOption');
     }
 
     /**

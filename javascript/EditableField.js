@@ -8,7 +8,7 @@
 		var editablefield = editablefield || {};
 
 		/**
-		 * Messages from EditableField are translatable using i18n.
+		 * Messages from Moo_EditableField are translatable using i18n.
 		 */
 		editablefield.messages = {
 			ERROR_CREATING_FIELD: 'Error creating field',
@@ -30,7 +30,7 @@
 		 */
 		editablefield.message = function() {
 			en = arguments[1] || editablefield.messages[arguments[0]];
-			return ss.i18n._t("EditableField." + arguments[0], en);
+			return ss.i18n._t("Moo_EditableField." + arguments[0], en);
 		};
 
 		/**
@@ -108,8 +108,8 @@
 					success: function(data) {
 						$('#Fields_fields').append(data);
 						statusMessage(editablefield.message('ADDED_FIELD'));
-						$("#Fields_fields li.EditableField:last").effect('highlight');
-						var name = $("#Fields_fields li.EditableField:last").attr("id").split(' ');
+						$("#Fields_fields li.Moo_EditableField:last").effect('highlight');
+						var name = $("#Fields_fields li.Moo_EditableField:last").attr("id").split(' ');
 						$("#Fields_fields select.fieldOption").append("<option value='" + name[2] + "'>New " + name[2] + "</option>");
 					},
 					error: function(e) {
@@ -134,7 +134,7 @@
 					url: url,
 					data: formData,
 					success: function(data) {
-						$('#Form_EditForm .EditableFieldEditor').html($(data.CurrentForm).find('.EditableFieldEditor').html());
+						$('#Form_EditForm .Moo_EditableFieldEditor').html($(data.CurrentForm).find('.Moo_EditableFieldEditor').html());
 					},
 					error: function(e) {
 					}
@@ -145,9 +145,9 @@
 		/**
 		 * Update details of a field
 		 */
-		$('.EditableField .save').entwine({
+		$('.Moo_EditableField .save').entwine({
 			onclick: function(e) {
-				var form = $(this).parents('.EditableField');
+				var form = $(this).parents('.Moo_EditableField');
 				var formData = form.find(':input').serialize() + '&save_row=1&action_save=1&&SecurityID=' + editablefield.getSecurityID();
 				var addURL = $(this).closest('form').attr('action');
 
@@ -172,10 +172,10 @@
 		/**
 		 * Delete a field
 		 */
-		$(".EditableField .delete").entwine({
+		$(".Moo_EditableField .delete").entwine({
 			onclick: function(e) {
 				e.preventDefault();
-				var form = $(this).parents('.EditableField');
+				var form = $(this).parents('.Moo_EditableField');
 				var formData = form.find(':input').serialize() + '&delete_row=1&action_delete=1&&SecurityID=' + editablefield.getSecurityID();
 				var addURL = $(this).closest('form').attr('action');
 				var remove = function(data) {
@@ -193,7 +193,7 @@
 							}
 						}
 					});
-					$(this).parents(".EditableField").slideUp(function() {
+					$(this).parents(".Moo_EditableField").slideUp(function() {
 						$(this).remove();
 					});
 				};
@@ -215,7 +215,7 @@
 		 * Upon renaming a field we should go through and rename all the fields in the select fields to
 		 * use this new field title. We can just worry about the title text - don't mess around with the keys
 		 */
-		$('.EditableField .fieldInfo .text').entwine({
+		$('.Moo_EditableField .fieldInfo .text').entwine({
 			onchange: function(e) {
 				var value = $(this).val();
 				var name = $(this).parents("li").attr("id").split(' ');
@@ -230,11 +230,11 @@
 		/**
 		 * Show the more options popdown. Or hide it if we currently have it open
 		 */
-		$(".EditableField .moreOptions").entwine({
+		$(".Moo_EditableField .moreOptions").entwine({
 			onclick: function(e) {
 				e.preventDefault();
 
-				var parent = $(this).parents(".EditableField");
+				var parent = $(this).parents(".Moo_EditableField");
 				if(!parent) {
 					return;
 				}
@@ -259,7 +259,7 @@
 		/**
 		 * Add a suboption to a radio field or to a dropdown box for example
 		 */
-		$(".EditableField .addableOption").entwine({
+		$(".Moo_EditableField .addableOption").entwine({
 			onclick: function(e) {
 				e.preventDefault();
 
@@ -291,7 +291,7 @@
 		/**
 		 * Delete a suboption such as an dropdown option or a checkbox field
 		 */
-		$(".EditableField .deleteOption").entwine({
+		$(".Moo_EditableField .deleteOption").entwine({
 			onclick: function(e) {
 				e.preventDefault();
 

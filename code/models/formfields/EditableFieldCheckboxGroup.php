@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EditableFieldCheckboxGroup is an object representing a set of selectable radio buttons created by CMS admin.
+ * Moo_EditableFieldCheckboxGroup is an object representing a set of selectable radio buttons created by CMS admin.
  *
  * @package editablefield
  *
@@ -10,7 +10,7 @@
  *
  * @method HasManyList Options()
  */
-class EditableFieldCheckboxGroup extends EditableFieldMultipleOption
+class Moo_EditableFieldCheckboxGroup extends Moo_EditableFieldMultipleOption
 {
     private static $singular_name = 'Checkbox Group';
     private static $plural_name   = 'Checkbox Groups';

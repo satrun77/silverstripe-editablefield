@@ -1,15 +1,15 @@
 <?php
 
 /**
- * EditableFieldAdminTest contains test cases for testing the LeftAndMain subclass.
+ * Moo_EditableFieldAdminTest contains test cases for testing the LeftAndMain subclass.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
  * @package editablefield
  */
-class EditableFieldAdminTest extends FunctionalTest
+class Moo_EditableFieldAdminTest extends FunctionalTest
 {
-    protected static $fixture_file = 'EditableFieldTest.yml';
+    protected static $fixture_file = 'Moo_EditableFieldTest.yml';
 
     public function testPermission()
     {
@@ -28,7 +28,7 @@ class EditableFieldAdminTest extends FunctionalTest
             ],
             'action_doSearch' => 'Apply Filter',
         ]);
-        $admin = new EditableFieldAdmin();
+        $admin = new Moo_EditableFieldAdmin();
         $admin->setRequest($request);
         $response = $admin->filter();
 
@@ -41,23 +41,23 @@ class EditableFieldAdminTest extends FunctionalTest
         $this->logInWithPermission('ADMIN');
 
         $request = new SS_HTTPRequest('post', 'admin/editablefield/doAdd', null, [
-            'Type'              => 'EditableFieldText',
+            'Type'              => 'Moo_EditableFieldText',
             'action_doAddField' => 'Add',
         ]);
-        $admin = new EditableFieldAdmin();
+        $admin = new Moo_EditableFieldAdmin();
         $admin->setRequest($request);
         $response = $admin->doAdd($request);
 
         $this->assertInstanceOf('HTMLText', $response);
-        $this->assertContains('EditableFieldText', $response->getValue());
+        $this->assertContains('Moo_EditableFieldText', $response->getValue());
     }
 
     public function testSaveRequest()
     {
         $this->logInWithPermission('ADMIN');
 
-        $text       = $this->objFromFixture('EditableFieldText', 'basic-text');
-        $email      = $this->objFromFixture('EditableFieldEmail', 'email-field');
+        $text       = $this->objFromFixture('Moo_EditableFieldText', 'basic-text');
+        $email      = $this->objFromFixture('Moo_EditableFieldEmail', 'email-field');
         $textName   = $text->Name . '_update';
         $emailTitle = 'Email address 2';
 
@@ -75,8 +75,8 @@ class EditableFieldAdminTest extends FunctionalTest
 
         $this->assertEquals('200', $response->getStatusCode());
 
-        $newText  = $this->objFromFixture('EditableFieldText', 'basic-text');
-        $newEmail = $this->objFromFixture('EditableFieldEmail', 'email-field');
+        $newText  = $this->objFromFixture('Moo_EditableFieldText', 'basic-text');
+        $newEmail = $this->objFromFixture('Moo_EditableFieldEmail', 'email-field');
 
         $this->assertEquals($newText->Name, $textName);
         $this->assertEquals($newEmail->Title, $emailTitle);
@@ -86,7 +86,7 @@ class EditableFieldAdminTest extends FunctionalTest
     {
         $this->logInWithPermission('ADMIN');
 
-        $text = $this->objFromFixture('EditableFieldText', 'basic-text');
+        $text = $this->objFromFixture('Moo_EditableFieldText', 'basic-text');
 
         $response = $this->post('admin/editablefield/EditForm', [
             'Fields'        => [
@@ -97,14 +97,14 @@ class EditableFieldAdminTest extends FunctionalTest
         ]);
 
         $this->assertEquals('200', $response->getStatusCode());
-        $this->assertFalse($this->getFixtureFactory()->get('EditableFieldText', 'basic-text'));
+        $this->assertFalse($this->getFixtureFactory()->get('Moo_EditableFieldText', 'basic-text'));
     }
 
     public function testAddOptionRequest()
     {
         $this->logInWithPermission('ADMIN');
 
-        $dropdown     = $this->objFromFixture('EditableFieldDropdown', 'basic-dropdown');
+        $dropdown     = $this->objFromFixture('Moo_EditableFieldDropdown', 'basic-dropdown');
         $optionsCount = $dropdown->Options()->count();
 
         $this->post('admin/editablefield/EditForm', [

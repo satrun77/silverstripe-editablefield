@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EditableFieldLiteral is an object representing blank slate where you can add HTML / Images / Flash created by CMS
+ * Moo_EditableFieldLiteral is an object representing blank slate where you can add HTML / Images / Flash created by CMS
  * admin.
  *
  * @package editablefield
@@ -9,7 +9,7 @@
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
-class EditableFieldLiteral extends EditableField
+class Moo_EditableFieldLiteral extends Moo_EditableField
 {
     private static $singular_name = 'HTML Block';
     private static $plural_name   = 'HTML Blocks';

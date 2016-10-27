@@ -1,4 +1,4 @@
-<li class="field $ClassName EditableField" id="$Name.ATT EditableItem_$Pos $Name">
+<li class="field $ClassName Moo_EditableField" id="$Name.ATT EditableItem_$Pos $Name">
 	<div class="fieldInfo">
 		<img class="icon" src="$Icon" alt="$ClassName" title="$singular_name" />
 
@@ -7,26 +7,26 @@
 
 	<div class="fieldActions">
 		<% if showExtraOptions %>
-		<a class="moreOptions" href="#" title="<% _t('EditableField.SHOWOPTIONS', 'Show Options') %>"><% _t('EditableField.SHOWOPTIONS','Show Options') %></a>
+		<a class="moreOptions" href="#" title="<% _t('Moo_EditableField.SHOWOPTIONS', 'Show Options') %>"><% _t('Moo_EditableField.SHOWOPTIONS','Show Options') %></a>
 		<% end_if %>
 
-		<a class="delete" href="#" title="<% _t('EditableField.DELETE', 'Delete') %>"><% _t('EditableField.DELETE', 'Delete') %></a>
-		<a class="save" href="#" title="<% _t('EditableField.SAVE', 'Save') %>"><% _t('EditableField.SAVE', 'Save') %></a>
+		<a class="delete" href="#" title="<% _t('Moo_EditableField.DELETE', 'Delete') %>"><% _t('Moo_EditableField.DELETE', 'Delete') %></a>
+		<a class="save" href="#" title="<% _t('Moo_EditableField.SAVE', 'Save') %>"><% _t('Moo_EditableField.SAVE', 'Save') %></a>
 	</div>
 
 	<% if showExtraOptions %>
 	<div class="extraOptions hidden" id="$Name.ATT-extraOptions">
 		<% if HasAddableOptions %>
 		<fieldset class="fieldOptionsGroup">
-			<legend><% _t('EditableField.OPTIONS', 'Options') %></legend>
+			<legend><% _t('Moo_EditableField.OPTIONS', 'Options') %></legend>
 			<ul class="editableFieldOptions" id="$FieldName.ATT-list">
 				<% loop Options %>
 				$EditSegment
 				<% end_loop %>
 				<% if HasAddableOptions %>
 				<li class="{$ClassName}Option">
-					<a href="#" rel="$ID" class="addableOption" title="<% _t('EditableField.ADD', 'Add option to field') %>">
-						<% _t('EditableField.ADDLabel', 'Add option') %>
+					<a href="#" rel="$ID" class="addableOption" title="<% _t('Moo_EditableField.ADD', 'Add option to field') %>">
+						<% _t('Moo_EditableField.ADDLabel', 'Add option') %>
 					</a>
 				</li>
 				<% end_if %>
@@ -36,7 +36,7 @@
 
 		<% if FieldConfiguration %>
 		<fieldset class="fieldOptionsGroup">
-			<legend><% _t('EditableField.FIELDCONFIGURATION', 'Field Configuration') %></legend>
+			<legend><% _t('Moo_EditableField.FIELDCONFIGURATION', 'Field Configuration') %></legend>
 			<% loop FieldConfiguration %>
 			$FieldHolder
 			<% end_loop %>
@@ -45,7 +45,7 @@
 
 		<% if FieldValidationOptions %>
 		<fieldset class="fieldOptionsGroup">
-			<legend><% _t('EditableField.VALIDATION', 'Validation') %></legend>
+			<legend><% _t('Moo_EditableField.VALIDATION', 'Validation') %></legend>
 			<% loop FieldValidationOptions %>
 			$FieldHolder
 			<% end_loop %>

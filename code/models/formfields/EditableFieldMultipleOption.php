@@ -1,9 +1,9 @@
 <?php
 
 /**
- * EditableFieldMultipleOption is a base class for multiple option fields to extend.
+ * Moo_EditableFieldMultipleOption is a base class for multiple option fields to extend.
  *
- * @see     EditableFieldCheckboxGroup, EditableFieldDropdown
+ * @see     Moo_EditableFieldCheckboxGroup, Moo_EditableFieldDropdown
  *
  * @package editablefield
  *
@@ -15,10 +15,10 @@
  * @property string $Name
  * @property string $Title
  */
-class EditableFieldMultipleOption extends EditableField
+class Moo_EditableFieldMultipleOption extends Moo_EditableField
 {
     private static $has_many = [
-        'Options' => 'EditableFieldOption',
+        'Options' => 'Moo_EditableFieldOption',
     ];
 
     /**

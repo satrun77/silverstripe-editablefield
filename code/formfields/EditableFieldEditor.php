@@ -1,13 +1,13 @@
 <?php
 
 /**
- * EditableFieldEditor is a form field that lists editable fields and allows to modify their data.
+ * Moo_EditableFieldEditor is a form field that lists editable fields and allows to modify their data.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
  * @package editablefield
  */
-class EditableFieldEditor extends FormField
+class Moo_EditableFieldEditor extends FormField
 {
     /**
      * List of current managed editable fields.
@@ -23,7 +23,7 @@ class EditableFieldEditor extends FormField
      */
     public function FieldHolder($properties = [])
     {
-        return $this->renderWith('EditableFieldEditor', $properties);
+        return $this->renderWith('Moo_EditableFieldEditor', $properties);
     }
 
     /**
@@ -34,7 +34,7 @@ class EditableFieldEditor extends FormField
     public function Fields()
     {
         if (null === $this->fields) {
-            $this->fields = $this->form->getRecord()->EditableFieldEditor();
+            $this->fields = $this->form->getRecord()->Moo_EditableFieldEditor();
         }
 
         return $this->fields;

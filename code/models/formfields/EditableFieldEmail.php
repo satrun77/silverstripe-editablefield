@@ -1,14 +1,14 @@
 <?php
 
 /**
- * EditableFieldEmail is an object representing email field created by CMS admin.
+ * Moo_EditableFieldEmail is an object representing email field created by CMS admin.
  *
  * @package editablefield
  *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
-class EditableFieldEmail extends EditableField
+class Moo_EditableFieldEmail extends Moo_EditableField
 {
     private static $singular_name = 'Email Field';
     private static $plural_name   = 'Email Fields';

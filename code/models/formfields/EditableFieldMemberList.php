@@ -1,14 +1,14 @@
 <?php
 
 /**
- * EditableFieldMemberList is an object representing member dropdown field created by CMS admin.
+ * Moo_EditableFieldMemberList is an object representing member dropdown field created by CMS admin.
  *
  * @package editablefield
  *
  * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
-class EditableFieldMemberList extends EditableField
+class Moo_EditableFieldMemberList extends Moo_EditableField
 {
     private static $singular_name = 'Member List Field';
     private static $plural_name   = 'Member List Fields';
@@ -23,7 +23,7 @@ class EditableFieldMemberList extends EditableField
         }
 
         $fields = new FieldList(
-            new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('EditableField.GROUP', 'Group'), $groups,
+            new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('Moo_EditableField.GROUP', 'Group'), $groups,
                               $groupID)
         );
 

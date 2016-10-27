@@ -1,19 +1,19 @@
 <?php
 
 /**
- * EditableFieldGroupTest contains test cases for test EditableFieldGroup class.
+ * Moo_EditableFieldGroupTest contains test cases for test Moo_EditableFieldGroup class.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
  * @package editablefield
  */
-class EditableFieldGroupTest extends FunctionalTest
+class Moo_EditableFieldGroupTest extends FunctionalTest
 {
-    protected static $fixture_file = 'EditableFieldGroupTest.yml';
+    protected static $fixture_file = 'Moo_EditableFieldGroupTest.yml';
 
     public function testEmptyGroup()
     {
-        $object = $this->objFromFixture('EditableFieldGroup', 'group-empty');
+        $object = $this->objFromFixture('Moo_EditableFieldGroup', 'group-empty');
 
         $this->assertEquals('Group Empty', $object->Title);
         $this->assertEquals(0, $object->Fields()->Count());
@@ -21,7 +21,7 @@ class EditableFieldGroupTest extends FunctionalTest
 
     public function testGroupFields()
     {
-        $object = $this->objFromFixture('EditableFieldGroup', 'group-1');
+        $object = $this->objFromFixture('Moo_EditableFieldGroup', 'group-1');
         $fields = $object->Fields();
         $this->assertGreaterThan(0, $fields->Count());
 
@@ -36,7 +36,7 @@ class EditableFieldGroupTest extends FunctionalTest
 
     public function testRequiredFields()
     {
-        $object    = $this->objFromFixture('EditableFieldGroup', 'group-empty');
+        $object    = $this->objFromFixture('Moo_EditableFieldGroup', 'group-empty');
         $validator = $object->getCMSValidator();
 
         $this->assertInstanceOf('RequiredFields', $validator);
