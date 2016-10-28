@@ -6,14 +6,15 @@
  *
  * @package editablefield
  *
- * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class Moo_EditableFieldLiteral extends Moo_EditableField
 {
-    private static $singular_name = 'HTML Block';
-    private static $plural_name   = 'HTML Blocks';
-
+    private static $singular_name   = 'HTML Block';
+    private static $plural_name     = 'HTML Blocks';
+    protected $customSettingsFields = [
+        'Content',
+    ];
     public function getFieldConfiguration()
     {
         $customSettings = unserialize($this->CustomSettings);
@@ -24,9 +25,9 @@ class Moo_EditableFieldLiteral extends Moo_EditableField
         $textAreaField->setRows(4);
         $textAreaField->setColumns(20);
 
-        return new FieldList(
-            $textAreaField
-        );
+        return [
+            $textAreaField,
+        ];
     }
 
     protected function initFormField()

@@ -7,7 +7,6 @@
  *
  * @package editablefield
  *
- * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
  * @method  HasManyList Options()
@@ -61,38 +60,32 @@ class Moo_EditableFieldMultipleOption extends Moo_EditableField
         return $clonedNode;
     }
 
-    /**
-     * On before saving this object we need to go through and keep an eye on
-     * all our option fields that are related to this field in the form.
-     *
-     * @param array
-     */
-    public function populateFromPostData($data)
+    public function getFieldConfiguration()
     {
-        parent::populateFromPostData($data);
+        if (!$this->isInDB()) {
+            $field = LiteralField::create('Options', '<p class="message notice">Once you save this field you will be able to add options</p>');
+        } else {
+            $config = GridFieldConfig_RelationEditor::create()
+                ->addComponent(new GridFieldOrderableRows('Sort'));
 
-        // get the current options
-        $fieldSet = $this->Options();
-
-        // go over all the current options and check if ID and Title still exists
-        foreach ($fieldSet as $option) {
-            if (isset($data[$option->ID]) && isset($data[$option->ID]['Title']) && $data[$option->ID]['Title'] != 'field-node-deleted') {
-                $option->populateFromPostData($data[$option->ID]);
-            } else {
-                $option->delete();
-            }
+            $config
+                ->getComponentByType('GridFieldDataColumns')
+                ->setDisplayFields([
+                    'Name'    => 'Name',
+                    'Title'   => 'Title',
+                    'Default' => 'Default',
+                ])
+                ->setFieldFormatting([
+                    'Default' => function ($_, Moo_EditableFieldOption $option) {
+                        return $option->Default ? 'Yes' : 'No';
+                    },
+                ]);
+            $field = GridField::create('Options', 'Options', $this->Options(), $config);
         }
-    }
 
-    /**
-     * Return whether or not this field has addable options such as a
-     * {@link EditableDropdownField} or {@link EditableRadioField}.
-     *
-     * @return bool
-     */
-    public function getHasAddableOptions()
-    {
-        return true;
+        return [
+            $field,
+        ];
     }
 
     /**

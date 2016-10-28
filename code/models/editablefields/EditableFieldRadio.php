@@ -3,7 +3,6 @@
 /**
  * Moo_EditableFieldRadio is an object representing radio buttons field created by CMS admin.
  *
- * @author silverstripe/userforms
  * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class Moo_EditableFieldRadio extends Moo_EditableFieldMultipleOption

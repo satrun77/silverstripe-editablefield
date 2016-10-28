@@ -5,7 +5,6 @@
  *
  * @package editablefield
  *
- * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class Moo_EditableFieldDropdown extends Moo_EditableFieldMultipleOption

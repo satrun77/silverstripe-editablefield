@@ -3,8 +3,6 @@
 /**
  * Moo_EditableFieldGroup is a data object class for editable field group.
  *
- * @package editablefield
- *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  *
  * @method ManyManyList Fields()
@@ -61,10 +59,10 @@ class Moo_EditableFieldGroup extends DataObject
             $config
                 ->getComponentByType('GridFieldDataColumns')
                 ->setDisplayFields([
-                                       'Name'  => _t('ConfigurablePage.NAME', 'Name'),
-                                       'Title' => _t('ConfigurablePage.TITLE', 'Title'),
-                                       'Sort'  => _t('ConfigurablePage.SORT', 'Sort'),
-                                   ]);
+                    'Name'  => _t('Moo_EditableFieldGroup.NAME', 'Name'),
+                    'Title' => _t('Moo_EditableFieldGroup.TITLE', 'Title'),
+                    'Sort'  => _t('Moo_EditableFieldGroup.SORT', 'Sort'),
+                ]);
             $config->addComponent(
                 new GridFieldEditableManyManyExtraColumns(
                     ['Sort' => 'Int']

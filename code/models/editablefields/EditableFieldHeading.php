@@ -5,14 +5,15 @@
  *
  * @package editablefield
  *
- * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class Moo_EditableFieldHeading extends Moo_EditableField
 {
-    private static $singular_name = 'Heading';
-    private static $plural_name   = 'Headings';
-
+    private static $singular_name   = 'Heading';
+    private static $plural_name     = 'Headings';
+    protected $customSettingsFields = [
+        'Level',
+    ];
     public function getFieldConfiguration()
     {
         $levels = [
@@ -27,13 +28,9 @@ class Moo_EditableFieldHeading extends Moo_EditableField
         $level = ($this->getSetting('Level')) ? $this->getSetting('Level') : 3;
         $label = _t('Moo_EditableFieldHeading.LEVEL', 'Select Heading Level');
 
-        $options = parent::getFieldConfiguration();
-
-        $options->push(
-            new DropdownField($this->getSettingName('Level'), $label, $levels, $level)
-        );
-
-        return $options;
+        return [
+            new DropdownField($this->getSettingName('Level'), $label, $levels, $level),
+        ];
     }
 
     protected function initFormField()

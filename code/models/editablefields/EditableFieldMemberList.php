@@ -5,14 +5,15 @@
  *
  * @package editablefield
  *
- * @author  silverstripe/userforms
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
 class Moo_EditableFieldMemberList extends Moo_EditableField
 {
-    private static $singular_name = 'Member List Field';
-    private static $plural_name   = 'Member List Fields';
-
+    private static $singular_name   = 'Member List Field';
+    private static $plural_name     = 'Member List Fields';
+    protected $customSettingsFields = [
+        'GroupID',
+    ];
     public function getFieldConfiguration()
     {
         $groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
@@ -22,12 +23,10 @@ class Moo_EditableFieldMemberList extends Moo_EditableField
             $groups = $groups->map('ID', 'Title');
         }
 
-        $fields = new FieldList(
+        return [
             new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('Moo_EditableField.GROUP', 'Group'), $groups,
-                              $groupID)
-        );
-
-        return $fields;
+                $groupID),
+        ];
     }
 
     protected function initFormField()

@@ -9,9 +9,11 @@
  */
 class Moo_EditableFieldPageTypeList extends Moo_EditableField
 {
-    private static $singular_name = 'Page Type List Field';
-    private static $plural_name   = 'Page Type List Fields';
-
+    private static $singular_name   = 'Page Type List Field';
+    private static $plural_name     = 'Page Type List Fields';
+    protected $customSettingsFields = [
+        'PageTypeName',
+    ];
     public function getFieldConfiguration()
     {
         $pageType = ($this->getSetting('PageTypeName')) ? $this->getSetting('PageTypeName') : 0;
@@ -25,12 +27,10 @@ class Moo_EditableFieldPageTypeList extends Moo_EditableField
         }
         asort($types);
 
-        $fields = new FieldList(
+        return [
             new DropdownField("Fields[$this->ID][CustomSettings][PageTypeName]",
-                              _t('Moo_EditableFieldPageTypeList.PAGETYPENAME', 'Page Type Name'), $types, $pageType)
-        );
-
-        return $fields;
+                _t('Moo_EditableFieldPageTypeList.PAGETYPENAME', 'Page Type Name'), $types, $pageType),
+        ];
     }
 
     protected function initFormField()
