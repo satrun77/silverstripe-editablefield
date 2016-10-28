@@ -63,12 +63,7 @@ class Moo_EditableFieldGroup extends DataObject
                     'Title' => _t('Moo_EditableFieldGroup.TITLE', 'Title'),
                     'Sort'  => _t('Moo_EditableFieldGroup.SORT', 'Sort'),
                 ]);
-            $config->addComponent(
-                new GridFieldEditableManyManyExtraColumns(
-                    ['Sort' => 'Int']
-                ),
-                'GridFieldEditButton'
-            );
+            $config->addComponent(new GridFieldOrderableRows('Sort'));
             $field = new GridField('Fields', 'Fields', $this->Fields(), $config);
             $fields->addFieldToTab('Root.Fields', $field);
         }
