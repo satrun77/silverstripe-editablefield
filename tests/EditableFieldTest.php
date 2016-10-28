@@ -4,13 +4,11 @@
  * Moo_EditableFieldTest contains test cases for test Moo_EditableField classes.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
- *
- * @package editablefield
  */
 class Moo_EditableFieldTest extends FunctionalTest
 {
-    protected static $fixture_file = 'Moo_EditableFieldTest.yml';
-    protected $fields              = [
+    protected static $fixture_file = 'EditableFieldTest.yml';
+    protected $fields = [
         'radio-field'         => [
             'class' => 'Moo_EditableFieldRadio',
             'field' => 'OptionsetField',
@@ -80,7 +78,7 @@ class Moo_EditableFieldTest extends FunctionalTest
     public function testModifyingFieldSettings()
     {
         $content = 'html content 1...';
-        $field   = $this->fields['html-field'];
+        $field = $this->fields['html-field'];
 
         $htmlField = $this->objFromFixture($field['class'], 'html-field');
         $htmlField->setSetting('Content', $content);
@@ -91,7 +89,7 @@ class Moo_EditableFieldTest extends FunctionalTest
 
     public function testMultipleOptionDuplication()
     {
-        $field    = $this->fields['department-dropdown'];
+        $field = $this->fields['department-dropdown'];
         $dropdown = $this->objFromFixture($field['class'], 'department-dropdown');
 
         $clone = $dropdown->duplicate();

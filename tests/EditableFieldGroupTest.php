@@ -4,12 +4,10 @@
  * Moo_EditableFieldGroupTest contains test cases for test Moo_EditableFieldGroup class.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
- *
- * @package editablefield
  */
 class Moo_EditableFieldGroupTest extends FunctionalTest
 {
-    protected static $fixture_file = 'Moo_EditableFieldGroupTest.yml';
+    protected static $fixture_file = 'EditableFieldGroupTest.yml';
 
     public function testEmptyGroup()
     {
@@ -25,7 +23,7 @@ class Moo_EditableFieldGroupTest extends FunctionalTest
         $fields = $object->Fields();
         $this->assertGreaterThan(0, $fields->Count());
 
-        $cmsFields  = $object->getCMSFields();
+        $cmsFields = $object->getCMSFields();
         $gridFields = $cmsFields->dataFieldByName('Fields');
 
         $this->assertTrue($gridFields !== null);
@@ -36,7 +34,7 @@ class Moo_EditableFieldGroupTest extends FunctionalTest
 
     public function testRequiredFields()
     {
-        $object    = $this->objFromFixture('Moo_EditableFieldGroup', 'group-empty');
+        $object = $this->objFromFixture('Moo_EditableFieldGroup', 'group-empty');
         $validator = $object->getCMSValidator();
 
         $this->assertInstanceOf('RequiredFields', $validator);

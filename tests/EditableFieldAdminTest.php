@@ -4,12 +4,10 @@
  * Moo_EditableFieldAdminTest contains test cases for testing the LeftAndMain subclass.
  *
  * @author  Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
- *
- * @package editablefield
  */
 class Moo_EditableFieldAdminTest extends FunctionalTest
 {
-    protected static $fixture_file = 'Moo_EditableFieldTest.yml';
+    protected static $fixture_file = 'EditableFieldTest.yml';
 
     public function testPermission()
     {
@@ -56,9 +54,9 @@ class Moo_EditableFieldAdminTest extends FunctionalTest
     {
         $this->logInWithPermission('ADMIN');
 
-        $text       = $this->objFromFixture('Moo_EditableFieldText', 'basic-text');
-        $email      = $this->objFromFixture('Moo_EditableFieldEmail', 'email-field');
-        $textName   = $text->Name . '_update';
+        $text = $this->objFromFixture('Moo_EditableFieldText', 'basic-text');
+        $email = $this->objFromFixture('Moo_EditableFieldEmail', 'email-field');
+        $textName = $text->Name . '_update';
         $emailTitle = 'Email address 2';
 
         $response = $this->post('admin/editablefield/EditForm', [
@@ -75,7 +73,7 @@ class Moo_EditableFieldAdminTest extends FunctionalTest
 
         $this->assertEquals('200', $response->getStatusCode());
 
-        $newText  = $this->objFromFixture('Moo_EditableFieldText', 'basic-text');
+        $newText = $this->objFromFixture('Moo_EditableFieldText', 'basic-text');
         $newEmail = $this->objFromFixture('Moo_EditableFieldEmail', 'email-field');
 
         $this->assertEquals($newText->Name, $textName);
@@ -104,7 +102,7 @@ class Moo_EditableFieldAdminTest extends FunctionalTest
     {
         $this->logInWithPermission('ADMIN');
 
-        $dropdown     = $this->objFromFixture('Moo_EditableFieldDropdown', 'basic-dropdown');
+        $dropdown = $this->objFromFixture('Moo_EditableFieldDropdown', 'basic-dropdown');
         $optionsCount = $dropdown->Options()->count();
 
         $this->post('admin/editablefield/EditForm', [
