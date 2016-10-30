@@ -14,6 +14,7 @@ class Moo_EditableFieldMemberList extends Moo_EditableField
     protected $customSettingsFields = [
         'GroupID',
     ];
+
     public function getFieldConfiguration()
     {
         $groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;
@@ -24,8 +25,7 @@ class Moo_EditableFieldMemberList extends Moo_EditableField
         }
 
         return [
-            new DropdownField("Fields[$this->ID][CustomSettings][GroupID]", _t('Moo_EditableField.GROUP', 'Group'), $groups,
-                $groupID),
+            new DropdownField($this->getSettingName('GroupID'), _t('Moo_EditableField.GROUP', 'Group'), $groups, $groupID),
         ];
     }
 

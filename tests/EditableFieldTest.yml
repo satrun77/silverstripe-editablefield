@@ -33,11 +33,11 @@ Moo_EditableFieldOption:
         
 Moo_EditableFieldText:
     basic-text:
-        Name: basictextname
+        Name: basictextname1
         Title: Basic Text Field
  
     basic-text-2:
-        Name: basictextname
+        Name: basictextname2
         Title: Basic Text Field
         
     text-area:
@@ -68,7 +68,7 @@ Moo_EditableFieldCheckbox:
         Title: Checkbox 1
         
     checkbox-2:
-        Name: checkbox1
+        Name: checkbox2
         Title: Checkbox 1
         
 Moo_EditableFieldEmail:
@@ -112,8 +112,8 @@ Moo_EditableFieldMemberList:
     member-field:
         Name: memberfield
         Title: Member list
-        CustomSettings: a:1:{s:7:"GroupID";s:1:"1";}
-        
+        CustomSettings: "a:1:{s:7:\"GroupID\";i:1;}"
+
 Moo_EditableFieldPageTypeList:
     pagetype-field:
         Name: pagetypefield

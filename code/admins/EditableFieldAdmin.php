@@ -7,8 +7,8 @@
  */
 class Moo_EditableFieldAdmin extends ModelAdmin
 {
-    private static $url_segment = 'editablefield';
-    private static $menu_title = 'Editable fields';
+    private static $url_segment    = 'editablefield';
+    private static $menu_title     = 'Editable fields';
     private static $managed_models = [
         'Moo_EditableField',
         'Moo_EditableFieldGroup',
@@ -21,7 +21,7 @@ class Moo_EditableFieldAdmin extends ModelAdmin
 
         // Customise the grid field to show icon and title
         $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
-        $config = $gridField
+        $config    = $gridField
             ->getConfig();
 
         $config->getComponentByType('GridFieldDataColumns')
@@ -73,5 +73,4 @@ class Moo_EditableFieldAdmin extends ModelAdmin
 
         return $output;
     }
-
 }

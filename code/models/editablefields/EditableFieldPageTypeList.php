@@ -28,7 +28,7 @@ class Moo_EditableFieldPageTypeList extends Moo_EditableField
         asort($types);
 
         return [
-            new DropdownField("Fields[$this->ID][CustomSettings][PageTypeName]",
+            new DropdownField($this->getSettingName('PageTypeName'),
                 _t('Moo_EditableFieldPageTypeList.PAGETYPENAME', 'Page Type Name'), $types, $pageType),
         ];
     }

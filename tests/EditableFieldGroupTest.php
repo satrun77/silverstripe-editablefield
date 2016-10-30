@@ -23,7 +23,7 @@ class Moo_EditableFieldGroupTest extends FunctionalTest
         $fields = $object->Fields();
         $this->assertGreaterThan(0, $fields->Count());
 
-        $cmsFields = $object->getCMSFields();
+        $cmsFields  = $object->getCMSFields();
         $gridFields = $cmsFields->dataFieldByName('Fields');
 
         $this->assertTrue($gridFields !== null);
@@ -34,7 +34,7 @@ class Moo_EditableFieldGroupTest extends FunctionalTest
 
     public function testRequiredFields()
     {
-        $object = $this->objFromFixture('Moo_EditableFieldGroup', 'group-empty');
+        $object    = $this->objFromFixture('Moo_EditableFieldGroup', 'group-empty');
         $validator = $object->getCMSValidator();
 
         $this->assertInstanceOf('RequiredFields', $validator);

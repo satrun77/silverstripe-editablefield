@@ -21,7 +21,7 @@ class Moo_EditableField extends DataObject
         'CustomSettings'     => 'Text',
     ];
     private static $singular_name = 'Editable Field';
-    private static $plural_name = 'Editable Fields';
+    private static $plural_name   = 'Editable Fields';
 
     protected $customSettingsFields = [];
     /**
@@ -62,7 +62,7 @@ class Moo_EditableField extends DataObject
      */
     public function setSetting($key, $value)
     {
-        $settings = $this->getSettings();
+        $settings       = $this->getSettings();
         $settings[$key] = $value;
 
         $this->setSettings($settings);
@@ -190,7 +190,7 @@ class Moo_EditableField extends DataObject
     {
         $r = parent::onBeforeWrite();
 
-        $exists = DataObject::get($this->class)->filter('Name', $this->Name)->exclude('ID', $this->ID);
+        $exists = self::get()->filter('Name', $this->Name)->exclude('ID', $this->ID);
         if ($exists->count()) {
             throw new ValidationException(_t('Moo_EditableField.UNIQUENAME', 'Field name "{name}" must be unique', '',
                 ['name' => $this->Name]));
@@ -198,9 +198,12 @@ class Moo_EditableField extends DataObject
 
         $this->Name = preg_replace('/[^a-zA-Z0-9_]+/', '', $this->Name);
 
-        $customSettings = Controller::curr()->getRequest()->postVar('CustomSettings');
+        $customSettings = $this->getSettings();
+        if (empty($customSettings)) {
+            $customSettings = (array) Controller::curr()->getRequest()->postVar('CustomSettings');
+        }
         if (!empty($this->customSettingsFields)) {
-            $customSettings = array_intersect_key($customSettings, array_flip((array)$this->customSettingsFields));
+            $customSettings = array_intersect_key($customSettings, array_flip((array) $this->customSettingsFields));
         }
         $this->setSettings($customSettings);
 
@@ -239,12 +242,17 @@ class Moo_EditableField extends DataObject
      */
     public function getErrorMessage()
     {
-        $title = strip_tags("'" . ($this->Title ? $this->Title : $this->Name) . "'");
+        $title    = strip_tags("'" . ($this->Title ? $this->Title : $this->Name) . "'");
         $standard = _t('Form.FIELDISREQUIRED', '{name} is required', ['name' => $title]);
 
         // only use CustomErrorMessage if it has a non empty value
         $errorMessage = (!empty($this->CustomErrorMessage)) ? $this->CustomErrorMessage : $standard;
 
         return DBField::create_field('Varchar', $errorMessage);
+    }
+
+    public function onBeforeDuplicate(Moo_EditableField $field)
+    {
+        $this->owner->Name = $field->Name . uniqid();
     }
 }
