@@ -12,10 +12,20 @@ class Moo_EditableFieldCheckbox extends Moo_EditableField
     private static $singular_name = 'Checkbox Field';
     private static $plural_name   = 'Checkboxes';
 
+    /**
+     * List of allowed custom settings fields.
+     *
+     * @var array
+     */
     protected $customSettingsFields = [
         'Default',
     ];
 
+    /**
+     * Get extra configuration fields.
+     *
+     * @return array
+     */
     public function getFieldConfiguration()
     {
         return [

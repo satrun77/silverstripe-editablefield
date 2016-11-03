@@ -11,9 +11,31 @@ class Moo_EditableFieldHeading extends Moo_EditableField
 {
     private static $singular_name   = 'Heading';
     private static $plural_name     = 'Headings';
+
+    /**
+     * List of allowed custom settings fields.
+     *
+     * @var array
+     */
     protected $customSettingsFields = [
         'Level',
     ];
+
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+
+        // Remove validation tab & fields
+        $fields->removeByName(['Root.Validation', 'Required', 'CustomErrorMessage']);
+
+        return $fields;
+    }
+
+    /**
+     * Get extra configuration fields.
+     *
+     * @return array
+     */
     public function getFieldConfiguration()
     {
         $levels = [
@@ -39,10 +61,5 @@ class Moo_EditableFieldHeading extends Moo_EditableField
         $labelField->addExtraClass('FormHeading');
 
         return $labelField;
-    }
-
-    public function getFieldValidationOptions()
-    {
-        return false;
     }
 }

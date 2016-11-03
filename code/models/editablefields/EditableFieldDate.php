@@ -9,11 +9,23 @@
  */
 class Moo_EditableFieldDate extends Moo_EditableField
 {
-    private static $singular_name   = 'Date Field';
-    private static $plural_name     = 'Date Fields';
+    private static $singular_name = 'Date Field';
+    private static $plural_name   = 'Date Fields';
+
+    /**
+     * List of allowed custom settings fields.
+     *
+     * @var array
+     */
     protected $customSettingsFields = [
         'DefaultToToday',
     ];
+
+    /**
+     * Get extra configuration fields.
+     *
+     * @return array
+     */
     public function getFieldConfiguration()
     {
         $default = ($this->getSetting('DefaultToToday')) ? $this->getSetting('DefaultToToday') : false;
@@ -22,17 +34,6 @@ class Moo_EditableFieldDate extends Moo_EditableField
         return [
             new CheckboxField($this->getSettingName('DefaultToToday'), $label, $default),
         ];
-    }
-
-    public function populateFromPostData($data)
-    {
-        $fieldPrefix = 'Default-';
-
-        if (empty($data['Default']) && !empty($data[$fieldPrefix . 'Year']) && !empty($data[$fieldPrefix . 'Month']) && !empty($data[$fieldPrefix . 'Day'])) {
-            $data['Default'] = $data['Year'] . '-' . $data['Month'] . '-' . $data['Day'];
-        }
-
-        parent::populateFromPostData($data);
     }
 
     protected function initFormField()

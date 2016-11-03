@@ -9,11 +9,23 @@
  */
 class Moo_EditableFieldPageTypeList extends Moo_EditableField
 {
-    private static $singular_name   = 'Page Type List Field';
-    private static $plural_name     = 'Page Type List Fields';
+    private static $singular_name = 'Page Type List Field';
+    private static $plural_name   = 'Page Type List Fields';
+
+    /**
+     * List of allowed custom settings fields.
+     *
+     * @var array
+     */
     protected $customSettingsFields = [
         'PageTypeName',
     ];
+
+    /**
+     * Get extra configuration fields.
+     *
+     * @return array
+     */
     public function getFieldConfiguration()
     {
         $pageType = ($this->getSetting('PageTypeName')) ? $this->getSetting('PageTypeName') : 0;
@@ -28,8 +40,12 @@ class Moo_EditableFieldPageTypeList extends Moo_EditableField
         asort($types);
 
         return [
-            new DropdownField($this->getSettingName('PageTypeName'),
-                _t('Moo_EditableFieldPageTypeList.PAGETYPENAME', 'Page Type Name'), $types, $pageType),
+            new DropdownField(
+                $this->getSettingName('PageTypeName'),
+                _t('Moo_EditableFieldPageTypeList.PAGETYPENAME', 'Page Type Name'),
+                $types,
+                $pageType
+            ),
         ];
     }
 

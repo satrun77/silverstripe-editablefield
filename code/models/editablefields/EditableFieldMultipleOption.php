@@ -43,11 +43,13 @@ class Moo_EditableFieldMultipleOption extends Moo_EditableField
      * Duplicate a pages content. We need to make sure all the fields attached
      * to that page go with it.
      *
+     * @param bool $doWrite
+     *
      * @return DataObject
      */
     public function duplicate($doWrite = true)
     {
-        $clonedNode = parent::duplicate();
+        $clonedNode = parent::duplicate($doWrite);
 
         if ($this->Options()) {
             foreach ($this->Options() as $field) {
@@ -60,6 +62,11 @@ class Moo_EditableFieldMultipleOption extends Moo_EditableField
         return $clonedNode;
     }
 
+    /**
+     * Get extra configuration fields.
+     *
+     * @return array
+     */
     public function getFieldConfiguration()
     {
         if (!$this->isInDB()) {

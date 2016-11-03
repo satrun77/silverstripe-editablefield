@@ -11,10 +11,21 @@ class Moo_EditableFieldMemberList extends Moo_EditableField
 {
     private static $singular_name   = 'Member List Field';
     private static $plural_name     = 'Member List Fields';
+
+    /**
+     * List of allowed custom settings fields.
+     *
+     * @var array
+     */
     protected $customSettingsFields = [
         'GroupID',
     ];
 
+    /**
+     * Get extra configuration fields.
+     *
+     * @return array
+     */
     public function getFieldConfiguration()
     {
         $groupID = ($this->getSetting('GroupID')) ? $this->getSetting('GroupID') : 0;

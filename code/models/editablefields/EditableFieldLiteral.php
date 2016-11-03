@@ -10,11 +10,23 @@
  */
 class Moo_EditableFieldLiteral extends Moo_EditableField
 {
-    private static $singular_name   = 'HTML Block';
-    private static $plural_name     = 'HTML Blocks';
+    private static $singular_name = 'HTML Block';
+    private static $plural_name   = 'HTML Blocks';
+
+    /**
+     * List of allowed custom settings fields.
+     *
+     * @var array
+     */
     protected $customSettingsFields = [
         'Content',
     ];
+
+    /**
+     * Get extra configuration fields.
+     *
+     * @return array
+     */
     public function getFieldConfiguration()
     {
         $customSettings = unserialize($this->CustomSettings);
@@ -35,10 +47,9 @@ class Moo_EditableFieldLiteral extends Moo_EditableField
         $label   = $this->Title ? "<label class='left'>$this->Title</label>" : '';
         $classes = $this->Title ? '' : ' nolabel';
 
-        return new LiteralField("LiteralField[$this->ID]", "<div id='$this->Name' class='field text$classes'>
-				$label
-				<div class='middleColumn literalFieldArea'>" . $this->getSetting('Content') . '</div>' .
-                                                         '</div>'
+        return new LiteralField(
+            "LiteralField[$this->ID]",
+            "<div id='$this->Name' class='field text$classes'>$label<div class='middleColumn literalFieldArea'>" . $this->getSetting('Content') . '</div></div>'
         );
     }
 }

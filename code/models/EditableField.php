@@ -23,7 +23,13 @@ class Moo_EditableField extends DataObject
     private static $singular_name = 'Editable Field';
     private static $plural_name   = 'Editable Fields';
 
+    /**
+     * List of fields names part of the custom settings.
+     *
+     * @var array
+     */
     protected $customSettingsFields = [];
+
     /**
      * Instance of FormField.
      *
@@ -98,6 +104,11 @@ class Moo_EditableField extends DataObject
         return 'editablefield/images/formfields/' . strtolower(substr($this->class, 4)) . '.png';
     }
 
+    /**
+     * Get the icon HTML tag.
+     *
+     * @return string
+     */
     public function getIconTag()
     {
         return '<img src="' . $this->getIcon() . '"/>';
@@ -112,9 +123,7 @@ class Moo_EditableField extends DataObject
             'Required', 'CustomErrorMessage', 'CustomSettings', 'Options',
         ]);
 
-        //Implement custom field Configuration on this field. Includes such things as
-//        * settings and options of a given editable form field.
-
+        // Add default field configurations "custom settings"
         $fields->addFieldsToTab('Root.FieldConfiguration', [
             new TextField(
                 $this->getSettingName('RightTitle'), _t('Moo_EditableField.RIGHTTITLE', 'Right Title'),
@@ -122,24 +131,21 @@ class Moo_EditableField extends DataObject
             ),
         ]);
 
+        // Add default validation fields
         $validateFields = [
-            new CheckboxField('Required', _t('Moo_EditableField.REQUIRED', 'Is this field Required?'),
-                $this->Required), new TextField('CustomErrorMessage',
-                _t('Moo_EditableField.CUSTOMERROR', 'Custom Error Message'),
-                $this->CustomErrorMessage),
+            new CheckboxField('Required', _t('Moo_EditableField.REQUIRED', 'Is this field Required?'), $this->Required),
+            new TextField('CustomErrorMessage', _t('Moo_EditableField.CUSTOMERROR', 'Custom Error Message'), $this->CustomErrorMessage),
         ];
         $fields->addFieldsToTab('Root.Validation', $validateFields);
 
+        // Add extra field configurations "custom settings" from the subclass
         if (method_exists($this, 'getFieldConfiguration')) {
-            $v = $this->getFieldConfiguration();
-            $fields->addFieldsToTab('Root.FieldConfiguration', $v);
+            $fields->addFieldsToTab('Root.FieldConfiguration', $this->getFieldConfiguration());
         }
 
+        // Add extra validation fields from the subclass
         if (method_exists($this, 'getFieldValidationOptions')) {
-            $v = $this->getFieldValidationOptions();
-            if (is_array($v)) {
-                $fields->addFieldsToTab('Root.Validation', $v);
-            }
+            $fields->addFieldsToTab('Root.Validation', $this->getFieldValidationOptions());
         }
 
         return $fields;
@@ -182,32 +188,39 @@ class Moo_EditableField extends DataObject
      * {@link parent::populateFromPostData()} to ensure that this method is
      * called
      *
-     * @param array $data
-     *
      * @throws ValidationException
      */
     public function onBeforeWrite()
     {
-        $r = parent::onBeforeWrite();
+        $return = parent::onBeforeWrite();
 
+        // Field name must be unique
         $exists = self::get()->filter('Name', $this->Name)->exclude('ID', $this->ID);
         if ($exists->count()) {
-            throw new ValidationException(_t('Moo_EditableField.UNIQUENAME', 'Field name "{name}" must be unique', '',
-                ['name' => $this->Name]));
+            throw new ValidationException(
+                _t('Moo_EditableField.UNIQUENAME', 'Field name "{name}" must be unique', '',
+                    ['name' => $this->Name])
+            );
         }
 
+        // Filter field name from un-supported HTML attribute value
         $this->Name = preg_replace('/[^a-zA-Z0-9_]+/', '', $this->Name);
 
+        // Get custom settings from the current object of request POST
         $customSettings = $this->getSettings();
         if (empty($customSettings)) {
             $customSettings = (array) Controller::curr()->getRequest()->postVar('CustomSettings');
         }
+
+        // Filter out any un-supported settings by the subclasss
         if (!empty($this->customSettingsFields)) {
             $customSettings = array_intersect_key($customSettings, array_flip((array) $this->customSettingsFields));
         }
+
+        // Set the filtered settings
         $this->setSettings($customSettings);
 
-        return $r;
+        return $return;
     }
 
     /**
@@ -253,6 +266,7 @@ class Moo_EditableField extends DataObject
 
     public function onBeforeDuplicate(Moo_EditableField $field)
     {
+        // The name field must be unique, this is temporary workaround
         $this->owner->Name = $field->Name . uniqid();
     }
 }

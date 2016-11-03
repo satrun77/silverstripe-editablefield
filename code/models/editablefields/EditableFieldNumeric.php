@@ -11,9 +11,16 @@ class Moo_EditableFieldNumeric extends Moo_EditableField
 {
     private static $singular_name   = 'Numeric Field';
     private static $plural_name     = 'Numeric Fields';
+
+    /**
+     * List of allowed custom settings fields.
+     *
+     * @var array
+     */
     protected $customSettingsFields = [
         'MinValue', 'MaxValue',
     ];
+
     protected function initFormField()
     {
         $field = new NumericField($this->Name, $this->Title);
@@ -22,6 +29,11 @@ class Moo_EditableFieldNumeric extends Moo_EditableField
         return $field;
     }
 
+    /**
+     * Get extra validation fields.
+     *
+     * @return array
+     */
     public function getFieldValidationOptions()
     {
         $min = ($this->getSetting('MinValue')) ? $this->getSetting('MinValue') : '';
