@@ -267,6 +267,6 @@ class Moo_EditableField extends DataObject
     public function onBeforeDuplicate(Moo_EditableField $field)
     {
         // The name field must be unique, this is temporary workaround
-        $this->owner->Name = $field->Name . uniqid();
+        $this->owner->setField('Name', $field->Name . uniqid());
     }
 }
