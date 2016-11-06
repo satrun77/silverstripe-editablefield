@@ -21,8 +21,7 @@ class Moo_EditableFieldAdmin extends ModelAdmin
 
         // Customise the grid field to show icon and title
         $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
-        $config    = $gridField
-            ->getConfig();
+        $config    = $gridField->getConfig();
 
         $config->getComponentByType('GridFieldDataColumns')
             ->setDisplayFields([
@@ -36,7 +35,8 @@ class Moo_EditableFieldAdmin extends ModelAdmin
 
         $adder = new GridFieldAddNewMultiClass();
         $adder->setClasses($this->getCreatableFields());
-        $config->removeComponentsByType('GridFieldAddNewButton')
+        $config
+            ->removeComponentsByType('GridFieldAddNewButton')
             ->addComponent($adder);
 
         return $form;
