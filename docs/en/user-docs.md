@@ -7,32 +7,10 @@ On the first column of the CMS administration view there is a menu item labelled
 
 - Click on **Editable fields** to open the management interface.
 
-On the second column there are 2 forms. The first form is for adding a new field and the second form is for filtering the list of displayed fields.
-
-![Manage view templates](../images/image1.png)
-
-
 ### Add new editable field
 
 - Select a field from the drop down menu
-- Click the **Add** button. The field will appear in the column to the right.
-
-![Add view template](../images/image2.png)
-
-
-### View and edit existing editable fields
-
-The far right column, lists the first 50 fields. The list that gets displayed is based on the filter query, and is ordered by Title ascending.
-
-![Enable view template](../images/image3.png)
-
-
-### Filter and search existing editable fields
-
-To filter the list of fields displayed, enter your query. The query string is used to search in the fields **Names** and **Titles** for any partially matched values.
-
-![Placeholder of view template in html editor](../images/image4.png)
-
+- Click the **Add** button to start creating an editable field.
 
 ### Field types
 
